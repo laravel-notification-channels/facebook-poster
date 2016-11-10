@@ -4,7 +4,7 @@ Here's the latest documentation on Laravel 5.3 Notifications System:
 
 https://laravel.com/docs/master/notifications
 
-# A Boilerplate repo for contributions
+# Use notifications to create posts on Facebook
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/facebook-poster.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/facebook-poster)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
