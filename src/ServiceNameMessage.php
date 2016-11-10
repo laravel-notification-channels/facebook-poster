@@ -1,10 +1,10 @@
 <?php
 
-namespace NotificationChannels\:channel_namespace;
+namespace NotificationChannels\FacebookPoster;
 
 use Illuminate\Support\Arr;
 
-class :service_nameMessage
+class FacebookPostMessage
 {
     // Message structure here
 }
