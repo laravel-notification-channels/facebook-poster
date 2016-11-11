@@ -1,24 +1,19 @@
 {
-    "name": "laravel-notification-channels/facebook-poster",
-    "description": "Use notifications to create posts on Facebook",
-    "homepage": "https://github.com/laravel-notification-channels/facebook-poster",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Ahmed Ashraf",
-            "email": "ahmed29329@gmail.com",
-            "homepage": "http://ahmedash.me/",
-            "role": "Developer"
-        }
-    ],
+    "name": "ahmedash95/laravel-facebook-poster-notification",
+    "description": "Laravel Notification for posting on Facebook",
+    "authors": [{
+        "name": "Ahmed Ashraf",
+        "email": "ahmed29329@gmail.com"
+    }],
     "require": {
-        "php": ">=5.6.4",
-        "illuminate/notifications": "^5.3",
-        "illuminate/support": "^5.1|^5.2|^5.3"
+        "facebook/graph-sdk": "^5.4",
+        "illuminate/notifications": "5.3.*",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "4.*",
+        "orchestra/testbench": "3.3.*"
     },
     "autoload": {
         "psr-4": {

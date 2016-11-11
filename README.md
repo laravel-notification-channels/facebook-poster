@@ -1,10 +1,5 @@
-Use this repo as a skeleton for your new channel, once you're done please submit a Pull Request on [this repo](https://github.com/laravel-notification-channels/new-channels) with all the files.
+# FacebookPoster Notification Channel For Laravel 5.3
 
-Here's the latest documentation on Laravel 5.3 Notifications System: 
-
-https://laravel.com/docs/master/notifications
-
-# Use notifications to create posts on Facebook
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/facebook-poster.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/facebook-poster)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -15,16 +10,19 @@ https://laravel.com/docs/master/notifications
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/facebook-poster/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/facebook-poster/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/facebook-poster.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/facebook-poster)
 
-This package makes it easy to send notifications using [Facebook posts](link to service) with Laravel 5.3.
 
-This is where your description should go. Add a little code example so build can understand real quick how the package can be used. Try and limit it to a paragraph or two.
+This package makes it easly to post on facebook using FacebookPoster Notification with Laravel 5.3
+
 
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up the Facebook posts service](#setting-up-the-Facebook posts-service)
+- [Setting up the Facebook posts service](#setting-up-the-facebook-poster-service)
 - [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
+	- [Publish Facebook post](#publish-facebook-post)
+	- [Publish Facebook post with link](#publish-facebook-post-with-link)
+	- [Publish Facebook post with image](#publish-facebook-post-with-image)
+	- [Publish Facebook post with video](#publish-facebook-post-with-video)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -35,19 +33,113 @@ This is where your description should go. Add a little code example so build can
 
 ## Installation
 
-Please also include the steps for any third-party service setup that's required for this package.
+You can install this package via composer:
 
-### Setting up the Facebook posts service
+``` bash
+composer require laravel-notification-channels/facebook-poster
+```
 
-Optionally include a few steps how users can set up the service.
+Next add the service provider to your `config/app.php`:
+
+```php
+...
+'providers' => [
+	...
+	 NotificationChannels\FacebookPoster\FacebookPosterServiceProvider::class,
+],
+...
+```
+
+### Setting up the Facebook Poster service
+
+You will need to [create](https://developers.facebook.com/apps/) a Facebook app in order to use this channel. Within in this app you will find the `APP Id and APP Secret Key`. Place them inside your `.env` file. In order to load them, add this to your `config/services.php` file:
+
+```php
+...
+'facebook_poster' => [
+	'app_id'    => getenv('FACEBOOK_APP_ID'),
+	'app_secret' => getenv('FACEBOOK_APP_SECRET'),
+	'access_token'    => getenv('FACEBOOK_ACCESS_TOKEN'),
+]
+...
+```
+
+
+This will load the Facebook app data from the `.env` file. Make sure to use the same keys you have used there like `FACEBOOK_APP_ID`.
+
+To create a life time access token for your fan page, open the [Graph Api Explorer](https://developers.facebook.com/tools/explorer/) on the right body heading, select your app then click on the get token button and select **Get Page Access Token** then select your page, after this add access_token parameter into the query string ```me?fields=id,name,access_token``` then submit and copy the access token value to your env FACEBOOK_ACCESS_TOKEN.
+
+
 
 ## Usage
 
-Some code examples, make it clear how to use the package
+Follow Laravel's [documentation](https://laravel.com/docs/master/notifications) to add the channel to your Notification class.
+
+### Publish Facebook post
+
+```php
+use NotificationChannels\FacebookPoster\FacebookPosterChannel;
+use NotificationChannels\FacebookPoster\FacebookPosterPost;
+
+class NewsWasPublished extends Notification
+{
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return [FacebookPosterChannel::class];
+    }
+
+    public function toFacebookPoster($notifiable) {
+        return new FacebookPosterPost('Laravel notifications are awesome!');
+    }
+}
+```
 
 ### Available methods
 
-A list of all available options
+Take a closer look at the `FacebookPosterPost` object. This is where the magic happens.
+
+````php
+public function toFacebookPoster($notifiable) {
+    return new FacebookPosterPost('Laravel notifications are awesome!');
+}
+````
+
+### Publish Facebook post with link
+It is possible to publish link with your post too. You just have to pass the url to the ``` withLink ``` method.
+````php
+public function toFacebookPoster($notifiable) {
+    return (new FacebookPosterPost('Laravel notifications are awesom!'))->withLink('https://laravel.com');
+}
+````
+
+### Publish Facebook post with image
+It is possible to publish image with your post too. You just have to pass the image path to the ``` withImage ``` method.
+````php
+public function toFacebookPoster($notifiable) {
+    return (new FacebookPosterPost('Laravel notifications are awesom!'))->withImage('tayee.png');
+}
+````
+
+**Notice** : withImage accepts absolute url not system paths like ``` /home/user/downloads/image.png ```
+
+
+
+### Publish Facebook post with video
+It is also possible to publish video with your post too. You just have to pass the video path to the ``` withVideo ``` method.
+````php
+public function toFacebookPoster($notifiable) {
+    return (new FacebookPosterPost('Laravel notifications are awesom!'))
+    	->withVideo('bedaer.mp4',[ 'title' => 'My First Video' , 'Description' => 'published by FacebookPoster.' ]);
+}
+````
+
 
 ## Changelog
 
