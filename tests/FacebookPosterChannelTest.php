@@ -23,6 +23,7 @@ class FacebookPosterChannelTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+
         $this->facebook = Mockery::mock(Facebook::class);
         $this->channel  = new FacebookPosterChannel($this->facebook);
     }
@@ -71,57 +72,4 @@ class FacebookPosterChannelTest extends TestCase
         $this->channel->send(new TestNotifiable(), new TestNotificationWithVideo());
     }
 
-}
-
-class TestNotifiable
-{
-
-    use \Illuminate\Notifications\Notifiable;
-
-    /**
-     * @return int
-     */
-    public function routeNotificationForFacebookPoster()
-    {
-        return false;
-    }
-}
-
-class TestNotification extends Notification
-{
-
-    public function toFacebookPoster($notifiable)
-    {
-        return new FacebookPosterPost('Laravel Notification Channels are awesome!');
-    }
-}
-
-class TestNotificationWithLink extends Notification
-{
-
-    public function toFacebookPoster($notifiable)
-    {
-        return (new FacebookPosterPost('Laravel Notification Channels are awesome!'))
-        		->withLink('http://laravel.com');
-    }
-}
-
-class TestNotificationWithImage extends Notification
-{
-
-    public function toFacebookPoster($notifiable)
-    {
-        return (new FacebookPosterPost('Laravel Notification Channels are awesome!'))
-        		->withImage('image1.png');
-    }
-}
-
-class TestNotificationWithVideo extends Notification
-{
-
-    public function toFacebookPoster($notifiable)
-    {
-        return (new FacebookPosterPost('Laravel Notification Channels are awesome!'))
-        		->withVideo('video1.mp4',['title' => 'laravel' , 'description' => 'laravel framework.']);
-    }
 }
