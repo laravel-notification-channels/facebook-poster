@@ -1,6 +1,6 @@
 {
-    "name": "laravel-notification-channels/laravel-facebook-poster-notification",
-    "description": "Laravel Notification for posting on Facebook",
+    "name": "laravel-notification-channels/facebook-poster",
+    "description": "Use notification to create posts on Facebook",
     "authors": [{
         "name": "Ahmed Ashraf",
         "email": "ahmed29329@gmail.com"
