@@ -2,9 +2,9 @@
 
 namespace NotificationChannels\FacebookPoster;
 
-use NotificationChannels\FacebookPoster\Attaches\Link;
-use NotificationChannels\FacebookPoster\Attaches\Image;
-use NotificationChannels\FacebookPoster\Attaches\Video;
+use NotificationChannels\FacebookPoster\Attachments\Link;
+use NotificationChannels\FacebookPoster\Attachments\Image;
+use NotificationChannels\FacebookPoster\Attachments\Video;
 
 class FacebookPosterPost
 {
@@ -21,7 +21,7 @@ class FacebookPosterPost
     protected $video;
 
     /**
-     * @var  string
+     * @var string
      */
     private $apiEndpoint = 'me/feed';
 
@@ -33,7 +33,7 @@ class FacebookPosterPost
     /**
      * Get Post content.
      *
-     * @return  string
+     * @return string
      */
     public function getContent()
     {
@@ -41,41 +41,53 @@ class FacebookPosterPost
     }
 
     /**
-     * Set facebook post main link
+     * Set facebook post main link.
+     *
      * @param string $link
-     * @return  $this
+     *
+     * @return $this
      */
     public function withLink($link)
     {
         $this->link = new Link($link);
+
         return $this;
     }
 
     /**
-     * Set facebook post image
-     * @param string $link
-     * @return  $this
+     * Set facebook post image.
+     *
+     * @param $imagePath
+     * @param string $endpoint
+     *
+     * @return $this
      */
-    public function withImage($imagePath,$endpoint = 'me/photos')
+    public function withImage($imagePath, $endpoint = 'me/photos')
     {
-        $this->image = new Image($imagePath,$endpoint);
+        $this->image = new Image($imagePath, $endpoint);
+
         return $this;
     }
+
     /**
-     * Set facebook post image
-     * @param string $link
-     * @return  $this
+     * Set facebook post image.
+     *
+     * @param $videoPath
+     * @param array  $data
+     * @param string $endpoint
+     *
+     * @return $this
      */
-    public function withVideo($videoPath,$data = [],$endpoint = 'me/videos')
+    public function withVideo($videoPath, $data = [], $endpoint = 'me/videos')
     {
-        $this->video = new video($videoPath,$endpoint);
-        
-        if(isset($data['title'])){
-        	$this->video->setTitle($data['title']);
+        $this->video = new video($videoPath, $endpoint);
+
+        if (isset($data['title'])) {
+            $this->video->setTitle($data['title']);
         }
-        
-        if(isset($data['description'])){
-        	$this->video->setDescription($data['description']);
+
+        if (isset($data['description'])) {
+            $this->video->setDescription($data['description']);
         }
 
         return $this;
@@ -83,7 +95,8 @@ class FacebookPosterPost
 
     /**
      * Return Facebook Post api endpoint.
-     * @return  string
+     *
+     * @return string
      */
     public function getApiEndpoint()
     {
@@ -91,30 +104,28 @@ class FacebookPosterPost
     }
 
     /**
-     * Build Twitter request body.
-     * @return  array
+     * Build Facebook post request body.
+     *
+     * @return array
      */
     public function getPostBody()
     {
-        $body  = [
-        	'message' => $this->getContent(),
-    	];
+        $body = [
+            'message' => $this->getContent(),
+        ];
 
-    	if($this->link != null)
-    	{
-    		$body['link'] = $this->link->getUrl();
-    	}
+        if ($this->link != null) {
+            $body['link'] = $this->link->getUrl();
+        }
 
-    	if($this->image != null)
-    	{
-    		$body['media'] = $this->image;
-    	}
+        if ($this->image != null) {
+            $body['media'] = $this->image;
+        }
 
-    	if($this->video != null)
-    	{
-    		$body['media'] = $this->video;
-    	}
+        if ($this->video != null) {
+            $body['media'] = $this->video;
+        }
 
-    	return $body;
+        return $body;
     }
 }

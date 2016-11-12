@@ -1,56 +1,82 @@
 <?php
 
-namespace NotificationChannels\FacebookPoster\Attaches;
+namespace NotificationChannels\FacebookPoster\Attachments;
 
 class Video
 {
     /** @var array */
-    private $data = [];
+    protected $data = [];
 
     /** @var string */
-    private $path;
-    
+    protected $path;
+
     /** @var string */
-    private $method = 'videoToUpload';
+    protected $method = 'videoToUpload';
+
+    /** @var string */
+    protected $apiEndpoint;
 
     /**
-     * @var  string
+     * @param string $videoPath
+     * @param string $endpoint
      */
-    private $apiEndpoint;
-
-    public function __construct($videoPath,$endpoint)
+    public function __construct($videoPath, $endpoint)
     {
-        $this->path        = $videoPath;
+        $this->path = $videoPath;
         $this->apiEndpoint = $endpoint;
     }
 
+    /**
+     * @param $title
+     *
+     * @return $this
+     */
     public function setTitle($title)
     {
         $this->data['title'] = $title;
+
         return $this;
     }
 
+    /**
+     * @param string $description
+     *
+     * @return $this
+     */
     public function setDescription($description)
     {
         $this->data['description'] = $description;
+
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getData()
     {
         return $this->data;
     }
 
+    /**
+     * @return string
+     */
     public function getPath()
     {
         return $this->path;
     }
-    
+
+    /**
+     * @return string
+     */
     public function getApiEndpoint()
     {
         return $this->apiEndpoint;
     }
 
+    /**
+     * @return string
+     */
     public function getMethod()
     {
         return $this->method;
