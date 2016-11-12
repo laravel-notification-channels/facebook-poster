@@ -7,7 +7,6 @@ use NotificationChannels\FacebookPoster\FacebookPosterPost;
 
 class TestNotificationWithImage extends Notification
 {
-
     public function toFacebookPoster($notifiable)
     {
         return (new FacebookPosterPost('Laravel Notification Channels are awesome!'))

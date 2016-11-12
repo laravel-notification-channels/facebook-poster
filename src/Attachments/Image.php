@@ -7,7 +7,7 @@ class Image
     /** @var string */
     protected $path;
 
-    /** @var  string */
+    /** @var string */
     protected $apiEndpoint;
 
     /** @var string */

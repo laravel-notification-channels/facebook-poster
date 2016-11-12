@@ -2,7 +2,6 @@
 
 namespace NotificationChannels\FacebookPoster;
 
-
 use Illuminate\Support\ServiceProvider;
 
 class FacebookPosterServiceProvider extends ServiceProvider

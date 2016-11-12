@@ -9,7 +9,6 @@ use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent;
 
 class FacebookPosterChannel
 {
-
     /** @var \Facebook\Facebook */
     protected $facebook;
 
@@ -24,7 +23,7 @@ class FacebookPosterChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
+     * @param mixed                                  $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
      * @throws InvalidPostContentException
@@ -41,7 +40,6 @@ class FacebookPosterChannel
 
         // here we check if post body has image or video to upload it first to facebook
         if (isset($postBody['media'])) {
-
             $endpoint = $postBody['media']->getApiEndpoint();
 
             if ($postBody['media'] instanceof Video) {

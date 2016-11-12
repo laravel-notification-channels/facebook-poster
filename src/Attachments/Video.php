@@ -9,20 +9,20 @@ class Video
 
     /** @var string */
     protected $path;
-    
+
     /** @var string */
     protected $method = 'videoToUpload';
 
-    /** @var  string */
+    /** @var string */
     protected $apiEndpoint;
 
     /**
      * @param string $videoPath
      * @param string $endpoint
      */
-    public function __construct($videoPath,$endpoint)
+    public function __construct($videoPath, $endpoint)
     {
-        $this->path        = $videoPath;
+        $this->path = $videoPath;
         $this->apiEndpoint = $endpoint;
     }
 
@@ -34,6 +34,7 @@ class Video
     public function setTitle($title)
     {
         $this->data['title'] = $title;
+
         return $this;
     }
 
@@ -45,6 +46,7 @@ class Video
     public function setDescription($description)
     {
         $this->data['description'] = $description;
+
         return $this;
     }
 
