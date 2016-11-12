@@ -1,5 +1,5 @@
 {
-    "name": "ahmedash95/laravel-facebook-poster-notification",
+    "name": "laravel-notification-channels/laravel-facebook-poster-notification",
     "description": "Laravel Notification for posting on Facebook",
     "authors": [{
         "name": "Ahmed Ashraf",
