@@ -1,6 +1,7 @@
 {
     "name": "laravel-notification-channels/facebook-poster",
     "description": "Use notification to create posts on Facebook",
+    "license": "MIT",
     "authors": [{
         "name": "Ahmed Ashraf",
         "email": "ahmed29329@gmail.com"
