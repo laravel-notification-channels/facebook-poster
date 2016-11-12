@@ -5,7 +5,7 @@ namespace NotificationChannels\FacebookPoster;
 use Facebook\Facebook;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\FacebookPoster\Attachments\Video;
-use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContentException;
+use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent;
 
 class FacebookPosterChannel
 {
@@ -37,27 +37,46 @@ class FacebookPosterChannel
 
         $endpoint = $facebookMessage->getApiEndpoint();
 
-        if(is_null($postBody['message']) && (!isset($postBody['link']) && !isset($postBody['media']))){
-            throw new InvalidPostContentException("Invalid Post Body Content");
-        }
+        $this->guardAgainstInvalidPostContent($postBody);
 
         // here we check if post body has image or video to upload it first to facebook
         if (isset($postBody['media'])) {
-        	
+
             $endpoint = $postBody['media']->getApiEndpoint();
 
-            if($postBody['media'] instanceof Video)
-            {
-                $postBody = array_merge($postBody,$postBody['media']->getData());
+            if ($postBody['media'] instanceof Video) {
+                $postBody = array_merge($postBody, $postBody['media']->getData());
             }
-        	
+
             $method = $postBody['media']->getMethod();
 
             $postBody['source'] = $this->facebook->{$method}($postBody['media']->getPath());
 
-        	unset($postBody['media']);
+            unset($postBody['media']);
         }
 
         $this->facebook->post($endpoint, $postBody);
+    }
+
+    /**
+     * @param array $postBody
+     *
+     * @throws \NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent
+     */
+    protected function guardAgainstInvalidPostContent($postBody)
+    {
+        if (!is_null($postBody['message'])) {
+            return;
+        }
+
+        if (isset($postBody['link'])) {
+            return;
+        }
+
+        if (isset($postBody['media'])) {
+            return;
+        }
+
+        throw InvalidPostContent::noContentSet();
     }
 }
