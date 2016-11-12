@@ -2,9 +2,9 @@
 
 namespace NotificationChannels\FacebookPoster;
 
-use NotificationChannels\FacebookPoster\Attaches\Link;
-use NotificationChannels\FacebookPoster\Attaches\Image;
-use NotificationChannels\FacebookPoster\Attaches\Video;
+use NotificationChannels\FacebookPoster\Attachments\Link;
+use NotificationChannels\FacebookPoster\Attachments\Image;
+use NotificationChannels\FacebookPoster\Attachments\Video;
 
 class FacebookPosterPost
 {
@@ -52,19 +52,26 @@ class FacebookPosterPost
     }
 
     /**
-     * Set facebook post image
-     * @param string $link
-     * @return  $this
+     * Set facebook post image.
+     *
+     * @param $imagePath
+     * @param string $endpoint
+     * @return $this
      */
-    public function withImage($imagePath,$endpoint = 'me/photos')
+    public function withImage($imagePath, $endpoint = 'me/photos')
     {
         $this->image = new Image($imagePath,$endpoint);
         return $this;
     }
+
     /**
-     * Set facebook post image
-     * @param string $link
-     * @return  $this
+     * Set facebook post image.
+     *
+     * @param $videoPath
+     * @param array $data
+     * @param string $endpoint
+     *
+     * @return $this
      */
     public function withVideo($videoPath,$data = [],$endpoint = 'me/videos')
     {
@@ -83,6 +90,7 @@ class FacebookPosterPost
 
     /**
      * Return Facebook Post api endpoint.
+     *
      * @return  string
      */
     public function getApiEndpoint()
@@ -91,7 +99,8 @@ class FacebookPosterPost
     }
 
     /**
-     * Build Twitter request body.
+     * Build Facebook post request body.
+     *
      * @return  array
      */
     public function getPostBody()

@@ -6,7 +6,7 @@ use Facebook\Facebook;
 use Facebook\FileUpload\FacebookFile;
 use Illuminate\Notifications\Notification;
 use Mockery;
-use NotificationChannels\FacebookPoster\Attaches\Image;
+use NotificationChannels\FacebookPoster\Attachments\Image;
 use NotificationChannels\FacebookPoster\FacebookPosterChannel;
 use NotificationChannels\FacebookPoster\FacebookPosterPost;
 use Orchestra\Testbench\TestCase;

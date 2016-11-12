@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\FacebookPoster\Attaches;
+namespace NotificationChannels\FacebookPoster\Attachments;
 
 class Video
 {

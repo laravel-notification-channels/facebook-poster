@@ -2,6 +2,8 @@
 
 namespace NotificationChannels\FacebookPoster\Exceptions;
 
-class InvalidPostContentException extends \Exception
+use Exception;
+
+class InvalidPostContentException extends Exception
 {
 }

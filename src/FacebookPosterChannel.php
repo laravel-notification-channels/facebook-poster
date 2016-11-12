@@ -4,7 +4,7 @@ namespace NotificationChannels\FacebookPoster;
 
 use Facebook\Facebook;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\FacebookPoster\Attaches\Video;
+use NotificationChannels\FacebookPoster\Attachments\Video;
 use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContentException;
 
 class FacebookPosterChannel
@@ -37,7 +37,7 @@ class FacebookPosterChannel
 
         $endpoint = $facebookMessage->getApiEndpoint();
 
-        if($postBody['message'] == null && (!isset($postBody['link']) && !isset($postBody['media']))){
+        if(is_null($postBody['message']) && (!isset($postBody['link']) && !isset($postBody['media']))){
             throw new InvalidPostContentException("Invalid Post Body Content");
         }
 

@@ -1,23 +1,27 @@
 <?php
 
-namespace NotificationChannels\FacebookPoster\Attaches;
+namespace NotificationChannels\FacebookPoster\Attachments;
 
 class Image
 {
     /** @var string */
-    private $path;
+    protected $path;
 
     /**
      * @var  string
      */
-    private $apiEndpoint;
+    protected $apiEndpoint;
 
     /** @var string */
-    private $method = 'fileToUpload';
+    protected $method = 'fileToUpload';
 
+    /**
+     * @param string $imagePath
+     * @param string $endpoint
+     */
     public function __construct($imagePath,$endpoint)
     {
-        $this->path        = $imagePath;
+        $this->path = $imagePath;
         $this->apiEndpoint = $endpoint;
     }
 
