@@ -66,7 +66,7 @@ You will need to [create](https://developers.facebook.com/apps/) a Facebook app 
 
 This will load the Facebook app data from the `.env` file. Make sure to use the same keys you have used there like `FACEBOOK_APP_ID`.
 
-To create a life time access token for your fan page, open the [Graph Api Explorer](https://developers.facebook.com/tools/explorer/) on the right body heading, select your app then click on the get token button and select **Get Page Access Token** then select your page, after this add access_token parameter into the query string ```me?fields=id,name,access_token``` then submit and copy the access token value to your env FACEBOOK_ACCESS_TOKEN.
+To create a life time access token for your fan page, open the [Graph Api Explorer](https://developers.facebook.com/tools/explorer/) on the right body heading, select your app then click on the get token button and select **Get Page Access Token** then select your page, after this add access_token parameter into the query string ```me?fields=id,name,access_token``` then submit and copy the access token and open this [Facebook Debugger Tool](https://developers.facebook.com/tools/debug/accesstoken) and paste your token then click on the Extend Access Token and take the never expire token value to your env FACEBOOK_ACCESS_TOKEN.
 
 
 
