@@ -63,7 +63,7 @@ class FacebookPosterChannel
      */
     protected function guardAgainstInvalidPostContent($postBody)
     {
-        if (!is_null($postBody['message'])) {
+        if (! is_null($postBody['message'])) {
             return;
         }
 
