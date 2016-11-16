@@ -67,6 +67,7 @@ You will need to [create](https://developers.facebook.com/apps/) a Facebook app 
 This will load the Facebook app data from the `.env` file. Make sure to use the same keys you have used there like `FACEBOOK_APP_ID`.
 
 To create a long time access token for your fan page, open the [Graph Api Explorer](https://developers.facebook.com/tools/explorer/) on the right body heading, select your app then click on the get token button and select **Get Page Access Token** then select your page and click on the same button again and select **Request publish_pages** - this will allow app to publish posts to yourpage with your account authorization, after this add access_token parameter into the query string ```me?fields=id,name,access_token``` then submit and copy the access token and open this [Facebook Debugger Tool](https://developers.facebook.com/tools/debug/accesstoken) and paste your token then click on the Extend Access Token and take the long time expire token value to your env FACEBOOK_ACCESS_TOKEN.
+
 **Note** : use [Facebook Debugger Tool](https://developers.facebook.com/tools/debug/accesstoken) to make sure that your token has these scopes : [ manage_pages, publish_pages, public_profile ]
 
 ## Usage
