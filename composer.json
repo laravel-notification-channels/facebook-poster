@@ -8,13 +8,13 @@
     }],
     "require": {
         "facebook/graph-sdk": "^5.4",
-        "illuminate/notifications": "5.3.*",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*"
+        "illuminate/notifications": "5.4.*",
+        "illuminate/support": "~5.1"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.5",
         "phpunit/phpunit": "4.*",
-        "orchestra/testbench": "3.3.*"
+        "orchestra/testbench": "3.4.*"
     },
     "autoload": {
         "psr-4": {
