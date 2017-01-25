@@ -1,4 +1,4 @@
-# FacebookPoster Notification Channel For Laravel 5.3
+# FacebookPoster Notification Channel For Laravel 5.4
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/facebook-poster.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/facebook-poster)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
