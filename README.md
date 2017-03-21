@@ -114,7 +114,7 @@ public function toFacebookPoster($notifiable) {
 It is possible to publish link with your post too. You just have to pass the url to the ``` withLink ``` method.
 ````php
 public function toFacebookPoster($notifiable) {
-    return (new FacebookPosterPost('Laravel notifications are awesom!'))->withLink('https://laravel.com');
+    return (new FacebookPosterPost('Laravel notifications are awesome!'))->withLink('https://laravel.com');
 }
 ````
 
@@ -122,7 +122,7 @@ public function toFacebookPoster($notifiable) {
 It is possible to publish image with your post too. You just have to pass the image path to the ``` withImage ``` method.
 ````php
 public function toFacebookPoster($notifiable) {
-    return (new FacebookPosterPost('Laravel notifications are awesom!'))->withImage('tayee.png');
+    return (new FacebookPosterPost('Laravel notifications are awesome!'))->withImage('tayee.png');
 }
 ````
 
@@ -134,7 +134,7 @@ public function toFacebookPoster($notifiable) {
 It is also possible to publish video with your post too. You just have to pass the video path to the ``` withVideo ``` method.
 ````php
 public function toFacebookPoster($notifiable) {
-    return (new FacebookPosterPost('Laravel notifications are awesom!'))
+    return (new FacebookPosterPost('Laravel notifications are awesome!'))
     	->withVideo('bedaer.mp4',[ 'title' => 'My First Video' , 'Description' => 'published by FacebookPoster.' ]);
 }
 ````
