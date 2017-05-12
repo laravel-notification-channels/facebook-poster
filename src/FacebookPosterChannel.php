@@ -30,6 +30,10 @@ class FacebookPosterChannel
      */
     public function send($notifiable, Notification $notification)
     {
+        if ($facebookSettings = $notifiable->routeNotificationFor('facebookPoster')) {
+            $this->switchSettings($facebookSettings);
+        }
+        
         $facebookMessage = $notification->toFacebookPoster($notifiable);
 
         $postBody = $facebookMessage->getPostBody();
@@ -76,5 +80,14 @@ class FacebookPosterChannel
         }
 
         throw InvalidPostContent::noContentSet();
+    }
+
+    /**
+     * Use per user settings instead of default ones
+     * @param $facebookSettings
+     */
+    private function switchSettings($facebookSettings)
+    {
+        $this->facebook = new Facebook($facebookSettings);
     }
 }
