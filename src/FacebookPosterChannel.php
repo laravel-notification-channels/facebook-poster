@@ -33,7 +33,7 @@ class FacebookPosterChannel
         if ($facebookSettings = $notifiable->routeNotificationFor('facebookPoster')) {
             $this->switchSettings($facebookSettings);
         }
-        
+
         $facebookMessage = $notification->toFacebookPoster($notifiable);
 
         $postBody = $facebookMessage->getPostBody();
@@ -83,7 +83,7 @@ class FacebookPosterChannel
     }
 
     /**
-     * Use per user settings instead of default ones
+     * Use per user settings instead of default ones.
      * @param $facebookSettings
      */
     private function switchSettings($facebookSettings)

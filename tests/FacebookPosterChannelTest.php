@@ -2,11 +2,11 @@
 
 namespace NotificationChannels\FacebookPoster\Test;
 
-use Facebook\Facebook;
-use Illuminate\Notifications\Notification;
 use Mockery;
-use NotificationChannels\FacebookPoster\FacebookPosterChannel;
+use Facebook\Facebook;
 use Orchestra\Testbench\TestCase;
+use Illuminate\Notifications\Notification;
+use NotificationChannels\FacebookPoster\FacebookPosterChannel;
 
 class FacebookPosterChannelTest extends TestCase
 {
