@@ -10,7 +10,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/facebook-poster.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/facebook-poster)
 
 
-This package makes it easly to post on facebook using FacebookPoster Notification with Laravel 5.3
+This package makes it easly to post on facebook using FacebookPoster Notification with Laravel 5.4
 
 
 ## Contents
