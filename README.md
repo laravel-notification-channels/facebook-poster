@@ -122,7 +122,7 @@ public function toFacebookPoster($notifiable) {
 It is possible to publish image with your post too. You just have to pass the image path to the ``` withImage ``` method.
 ````php
 public function toFacebookPoster($notifiable) {
-    return (new FacebookPosterPost('Laravel notifications are awesome!'))->withImage('tayee.png');
+    return (new FacebookPosterPost('Laravel notifications are awesome!'))->withImage(url('uploads/images/tayee.png'));
 }
 ````
 
