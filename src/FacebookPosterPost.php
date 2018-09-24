@@ -20,6 +20,9 @@ class FacebookPosterPost
     /** @object FacebookPosterVideo */
     protected $video;
 
+    /** @var array */
+    protected $params;
+
     /**
      * @var string
      */
@@ -94,6 +97,21 @@ class FacebookPosterPost
     }
 
     /**
+     * Schedule the post for a date in the future.
+     *
+     * @param string $timestamp UNIX timestamp
+     *
+     * @return $this
+     */
+    public function scheduledFor($timestamp)
+    {
+        $this->params['published'] = false;
+        $this->params['scheduled_publish_time'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
      * Return Facebook Post api endpoint.
      *
      * @return string
@@ -124,6 +142,10 @@ class FacebookPosterPost
 
         if ($this->video != null) {
             $body['media'] = $this->video;
+        }
+
+        if ($this->params != null) {
+            $body = array_merge($body, $this->params);
         }
 
         return $body;
