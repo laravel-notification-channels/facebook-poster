@@ -22,6 +22,7 @@ This package makes it easly to post on facebook using FacebookPoster Notificatio
 	- [Publish Facebook post with link](#publish-facebook-post-with-link)
 	- [Publish Facebook post with image](#publish-facebook-post-with-image)
 	- [Publish Facebook post with video](#publish-facebook-post-with-video)
+	- [Publish Facebook scheduled post](#publish-facebook-scheduled-post)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -136,6 +137,15 @@ It is also possible to publish video with your post too. You just have to pass t
 public function toFacebookPoster($notifiable) {
     return (new FacebookPosterPost('Laravel notifications are awesome!'))
     	->withVideo('bedaer.mp4',[ 'title' => 'My First Video' , 'Description' => 'published by FacebookPoster.' ]);
+}
+````
+
+### Publish Facebook scheduled post
+It is also possible to publish a scheduled post. You just have to pass a UNIX timestamp to the ``` scheduledFor ``` method.
+````php
+public function toFacebookPoster($notifiable) {
+    return (new FacebookPosterPost('Laravel notifications are awesome!'))
+    	->scheduledFor(1538061702);
 }
 ````
 
