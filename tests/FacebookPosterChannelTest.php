@@ -16,7 +16,7 @@ class FacebookPosterChannelTest extends TestCase
     /** @var \NotificationChannels\FacebookPoster\FacebookPosterChannel */
     protected $channel;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -24,7 +24,7 @@ class FacebookPosterChannelTest extends TestCase
         $this->channel = new FacebookPosterChannel($this->facebook);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
         parent::tearDown();
@@ -33,8 +33,10 @@ class FacebookPosterChannelTest extends TestCase
     /** @test */
     public function it_can_send_a_post()
     {
-        $this->facebook->shouldReceive('post')->once()->with('me/feed',
-            ['message' => 'Laravel Notification Channels are awesome!']);
+        $this->facebook->shouldReceive('post')->once()->with(
+            'me/feed',
+            ['message' => 'Laravel Notification Channels are awesome!']
+        );
 
         $this->channel->send(new TestNotifiable(), new TestNotification());
     }
@@ -42,8 +44,10 @@ class FacebookPosterChannelTest extends TestCase
     /** @test */
     public function it_can_send_a_post_with_link()
     {
-        $this->facebook->shouldReceive('post')->once()->with('me/feed',
-            ['message' => 'Laravel Notification Channels are awesome!', 'link' => 'http://laravel.com']);
+        $this->facebook->shouldReceive('post')->once()->with(
+            'me/feed',
+            ['message' => 'Laravel Notification Channels are awesome!', 'link' => 'http://laravel.com']
+        );
 
         $this->channel->send(new TestNotifiable(), new TestNotificationWithLink());
     }
