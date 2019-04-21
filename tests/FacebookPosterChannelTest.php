@@ -16,7 +16,7 @@ class FacebookPosterChannelTest extends TestCase
     /** @var \NotificationChannels\FacebookPoster\FacebookPosterChannel */
     protected $channel;
 
-    public function setUp(): void
+    public function setUp()
     {
         parent::setUp();
 
@@ -24,7 +24,7 @@ class FacebookPosterChannelTest extends TestCase
         $this->channel = new FacebookPosterChannel($this->facebook);
     }
 
-    public function tearDown(): void
+    public function tearDown()
     {
         Mockery::close();
         parent::tearDown();
