@@ -39,17 +39,6 @@ You can install this package via composer:
 composer require laravel-notification-channels/facebook-poster
 ```
 
-Next add the service provider to your `config/app.php`:
-
-```php
-...
-'providers' => [
-	...
-	 NotificationChannels\FacebookPoster\FacebookPosterServiceProvider::class,
-],
-...
-```
-
 ### Setting up the Facebook Poster service
 
 You will need to [create](https://developers.facebook.com/apps) a Facebook app in order to use this channel. Within in this app you will find the App ID and secret. Place them inside your `.env` file. In order to load them, add this to your `config/services.php` file:
