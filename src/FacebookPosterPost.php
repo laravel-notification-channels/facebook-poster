@@ -6,6 +6,7 @@ use DateTimeInterface;
 use NotificationChannels\FacebookPoster\Attachments\Link;
 use NotificationChannels\FacebookPoster\Attachments\Image;
 use NotificationChannels\FacebookPoster\Attachments\Video;
+use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent;
 
 class FacebookPosterPost
 {
@@ -151,6 +152,8 @@ class FacebookPosterPost
      */
     public function getPostBody()
     {
+        $this->validate();
+
         $body = [
             'message' => $this->getContent(),
         ];
@@ -172,5 +175,19 @@ class FacebookPosterPost
         }
 
         return $body;
+    }
+
+    /**
+     * Validate that there is acceptable post content.
+     *
+     * @throws \NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent
+     */
+    protected function validate()
+    {
+        if ($this->content || $this->link || $this->media) {
+            return;
+        }
+
+        throw InvalidPostContent::noContentSet();
     }
 }

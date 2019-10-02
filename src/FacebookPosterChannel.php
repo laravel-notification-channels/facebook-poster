@@ -39,8 +39,6 @@ class FacebookPosterChannel
 
         $endpoint = $facebookMessage->getApiEndpoint();
 
-        $this->guardAgainstInvalidPostContent($postBody);
-
         if (isset($postBody['media'])) {
             $endpoint = $postBody['media']->getApiEndpoint();
 
@@ -54,28 +52,6 @@ class FacebookPosterChannel
         }
 
         $this->facebook->post($endpoint, $postBody);
-    }
-
-    /**
-     * @param array $postBody
-     *
-     * @throws \NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent
-     */
-    protected function guardAgainstInvalidPostContent($postBody)
-    {
-        if (! is_null($postBody['message'])) {
-            return;
-        }
-
-        if (isset($postBody['link'])) {
-            return;
-        }
-
-        if (isset($postBody['media'])) {
-            return;
-        }
-
-        throw InvalidPostContent::noContentSet();
     }
 
     /**
