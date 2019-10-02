@@ -32,9 +32,8 @@ class Video extends Attachment
      * @param  string  $title
      * @param  string  $description
      * @param  string  $apiEndpoint
-     * @return void
      */
-    public function __construct($path, $title = null, $description = null, $apiEndpoint)
+    public function __construct($path, $title, $description, $apiEndpoint)
     {
         $this->path = $path;
         $this->title = $title;

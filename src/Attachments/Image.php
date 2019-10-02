@@ -15,7 +15,7 @@ class Image extends Attachment
      * Create a new image instance.
      *
      * @param  string  $path
-     * @param  string  $endpoint
+     * @param  string  $apiEndpoint
      */
     public function __construct($path, $apiEndpoint)
     {

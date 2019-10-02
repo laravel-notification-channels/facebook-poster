@@ -26,14 +26,14 @@ class FacebookPosterPost
     /**
      * The post image.
      *
-     * @var \NotificationChannels\FacebookPoster\Image
+     * @var \NotificationChannels\FacebookPoster\Attachments\Image
      */
     protected $image;
 
     /**
      * The post video.
      *
-     * @var \NotificationChannels\FacebookPoster\Video
+     * @var \NotificationChannels\FacebookPoster\Attachments\Video
      */
     protected $video;
 
