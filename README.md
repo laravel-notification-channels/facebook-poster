@@ -57,8 +57,8 @@ You will need to [create](https://developers.facebook.com/apps) a Facebook app i
 ```php
 ...
 'facebook_poster' => [
-	'app_id' => getenv('FACEBOOK_APP_ID'),
-	'app_secret' => getenv('FACEBOOK_APP_SECRET'),
+	'client_id' => getenv('FACEBOOK_APP_ID'),
+	'client_secret' => getenv('FACEBOOK_APP_SECRET'),
 	'access_token' => getenv('FACEBOOK_ACCESS_TOKEN'),
 ],
 ...
