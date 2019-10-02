@@ -9,7 +9,7 @@ class TestNotificationWithImage extends Notification
 {
     public function toFacebookPoster($notifiable)
     {
-        return (new FacebookPosterPost('Laravel Notification Channels are awesome!'))
+        return (new FacebookPosterPost('message'))
             ->withImage('image1.png');
     }
 }

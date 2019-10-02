@@ -26,14 +26,14 @@ class FacebookPosterPost
     /**
      * The post image.
      *
-     * @var \NotificationChannels\FacebookPoster\Image
+     * @var \NotificationChannels\FacebookPoster\Attachments\Image
      */
     protected $image;
 
     /**
      * The post video.
      *
-     * @var \NotificationChannels\FacebookPoster\Video
+     * @var \NotificationChannels\FacebookPoster\Attachments\Video
      */
     protected $video;
 
@@ -87,48 +87,37 @@ class FacebookPosterPost
     }
 
     /**
-     * Set facebook post image.
+     * Set a post image.
      *
-     * @param $imagePath
-     * @param string $endpoint
-     *
+     * @param  string  $path
+     * @param  string  $endpoint
      * @return $this
      */
-    public function withImage($imagePath, $endpoint = 'me/photos')
+    public function withImage($path, $endpoint = 'me/photos')
     {
-        $this->image = new Image($imagePath, $endpoint);
+        $this->image = new Image($path, $endpoint);
 
         return $this;
     }
 
     /**
-     * Set facebook post image.
+     * Set a post video.
      *
-     * @param $videoPath
-     * @param array  $data
-     * @param string $endpoint
-     *
+     * @param  string  $path
+     * @param  string  $title
+     * @param  string  $description
+     * @param  string  $endpoint
      * @return $this
      */
-    public function withVideo($videoPath, $data = [], $endpoint = 'me/videos')
+    public function withVideo($path, $title = null, $description = null, $endpoint = 'me/videos')
     {
-        $this->video = new Video($videoPath, $endpoint);
-
-        if (isset($data['title'])) {
-            $this->video->setTitle($data['title']);
-        }
-
-        if (isset($data['description'])) {
-            $this->video->setDescription($data['description']);
-        }
+        $this->video = new Video($path, $title, $description, $endpoint);
 
         return $this;
     }
 
     /**
      * Schedule the post for a date in the future.
-     *
-     * @param string $timestamp UNIX timestamp
      *
      * @param  \DateTimeInterface|int  $timestamp
      * @return $this
