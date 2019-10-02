@@ -184,7 +184,7 @@ class FacebookPosterPost
      */
     protected function validate()
     {
-        if ($this->message || $this->link || $this->media) {
+        if ($this->message || $this->link || $this->image || $this->video) {
             return;
         }
 
