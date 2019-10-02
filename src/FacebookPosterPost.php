@@ -112,7 +112,7 @@ class FacebookPosterPost
      */
     public function withVideo($videoPath, $data = [], $endpoint = 'me/videos')
     {
-        $this->video = new video($videoPath, $endpoint);
+        $this->video = new Video($videoPath, $endpoint);
 
         if (isset($data['title'])) {
             $this->video->setTitle($data['title']);
