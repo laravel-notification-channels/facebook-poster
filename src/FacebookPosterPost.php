@@ -19,7 +19,7 @@ class FacebookPosterPost
     /**
      * The post link.
      *
-     * @var \NotificationChannels\FacebookPoster\Link
+     * @var string
      */
     protected $link;
 
