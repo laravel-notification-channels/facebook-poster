@@ -7,11 +7,17 @@ use Illuminate\Notifications\Notification;
 
 class FacebookPosterChannel
 {
-    /** @var \Facebook\Facebook */
+    /**
+     * The Facebook client.
+     *
+     * @var \Facebook\Facebook
+     */
     protected $facebook;
 
     /**
-     * @param \Facebook\Facebook $facebook
+     * Create a new channel instance.
+     *
+     * @param  \Facebook\Facebook  $facebook
      */
     public function __construct(Facebook $facebook)
     {
@@ -21,8 +27,8 @@ class FacebookPosterChannel
     /**
      * Send the given notification.
      *
-     * @param mixed                                  $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
+     * @param  mixed  $notifiable
+     * @param  \Illuminate\Notifications\Notification $notification
      */
     public function send($notifiable, Notification $notification)
     {
@@ -53,10 +59,12 @@ class FacebookPosterChannel
 
     /**
      * Use per user settings instead of default ones.
-     * @param $facebookSettings
+     *
+     * @param  array  $config
+     * @return void
      */
-    private function switchSettings($facebookSettings)
+    protected function switchSettings(array $config)
     {
-        $this->facebook = new Facebook($facebookSettings);
+        $this->facebook = new Facebook($config);
     }
 }
