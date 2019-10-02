@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\FacebookPoster\Tests;
+namespace NotificationChannels\FacebookPoster\Tests\Attachments;
 
 use NotificationChannels\FacebookPoster\Attachments\Image;
 use NotificationChannels\FacebookPoster\Tests\TestCase;
