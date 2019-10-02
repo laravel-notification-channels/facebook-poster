@@ -3,6 +3,7 @@
 namespace NotificationChannels\FacebookPoster\Test;
 
 use DateTime;
+use DateTimeImmutable;
 use Orchestra\Testbench\TestCase;
 use NotificationChannels\FacebookPoster\FacebookPosterPost;
 
@@ -30,6 +31,22 @@ class FacebookPosterPostTest extends TestCase
         $post = new FacebookPosterPost('Test');
 
         $post->scheduledFor(new DateTime('2000-01-01'));
+
+        $result = $post->getPostBody();
+
+        $this->assertEquals([
+            'message' => 'Test',
+            'published' => false,
+            'scheduled_publish_time' => 946684800,
+        ], $result);
+    }
+
+    /** @test */
+    public function it_can_be_scheduled_with_immutable_datetime()
+    {
+        $post = new FacebookPosterPost('Test');
+
+        $post->scheduledFor(new DateTimeImmutable('2000-01-01'));
 
         $result = $post->getPostBody();
 
