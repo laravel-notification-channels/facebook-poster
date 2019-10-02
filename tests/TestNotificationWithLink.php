@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\FacebookPoster\Test;
+namespace NotificationChannels\FacebookPoster\Tests;
 
 use Illuminate\Notifications\Notification;
 use NotificationChannels\FacebookPoster\FacebookPosterPost;

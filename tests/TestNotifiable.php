@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\FacebookPoster\Test;
+namespace NotificationChannels\FacebookPoster\Tests;
 
 class TestNotifiable
 {

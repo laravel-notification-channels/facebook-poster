@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\FacebookPoster\Test;
+namespace NotificationChannels\FacebookPoster\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;

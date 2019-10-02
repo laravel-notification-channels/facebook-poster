@@ -24,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\FacebookPoster\\Test\\": "tests"
+            "NotificationChannels\\FacebookPoster\\Tests\\": "tests"
         }
     },
     "scripts": {
