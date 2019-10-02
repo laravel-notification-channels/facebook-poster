@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\FacebookPoster;
 
+use DateTimeInterface;
 use NotificationChannels\FacebookPoster\Attachments\Link;
 use NotificationChannels\FacebookPoster\Attachments\Image;
 use NotificationChannels\FacebookPoster\Attachments\Video;
@@ -101,10 +102,15 @@ class FacebookPosterPost
      *
      * @param string $timestamp UNIX timestamp
      *
+     * @param  \DateTimeInterface|int  $timestamp
      * @return $this
      */
     public function scheduledFor($timestamp)
     {
+        $timestamp = $timestamp instanceof DateTimeInterface
+            ? $timestamp->getTimestamp()
+            : $timestamp;
+
         $this->params['published'] = false;
         $this->params['scheduled_publish_time'] = $timestamp;
 
