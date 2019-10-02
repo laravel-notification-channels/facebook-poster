@@ -81,7 +81,7 @@ class FacebookPosterPost
      */
     public function withLink($link)
     {
-        $this->link = new Link($link);
+        $this->link = $link;
 
         return $this;
     }
@@ -167,7 +167,7 @@ class FacebookPosterPost
         ];
 
         if ($this->link != null) {
-            $body['link'] = $this->link->getUrl();
+            $body['link'] = $this->link;
         }
 
         if ($this->image != null) {
