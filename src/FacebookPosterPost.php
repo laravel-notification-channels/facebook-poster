@@ -64,7 +64,7 @@ class FacebookPosterPost
     }
 
     /**
-     * Get post message.
+     * Get the post message.
      *
      * @return string
      */
@@ -74,9 +74,9 @@ class FacebookPosterPost
     }
 
     /**
-     * Set facebook post main link.
+     * Set a post link.
      *
-     * @param string $link
+     * @param  string  $link
      *
      * @return $this
      */
