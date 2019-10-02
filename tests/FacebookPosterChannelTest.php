@@ -4,8 +4,6 @@ namespace NotificationChannels\FacebookPoster\Test;
 
 use Mockery;
 use Facebook\Facebook;
-use Orchestra\Testbench\TestCase;
-use Illuminate\Notifications\Notification;
 use NotificationChannels\FacebookPoster\FacebookPosterChannel;
 
 class FacebookPosterChannelTest extends TestCase
@@ -16,18 +14,12 @@ class FacebookPosterChannelTest extends TestCase
     /** @var \NotificationChannels\FacebookPoster\FacebookPosterChannel */
     protected $channel;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->facebook = Mockery::mock(Facebook::class);
         $this->channel = new FacebookPosterChannel($this->facebook);
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
-        parent::tearDown();
     }
 
     /** @test */
