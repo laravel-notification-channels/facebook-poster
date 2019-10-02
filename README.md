@@ -52,15 +52,15 @@ Next add the service provider to your `config/app.php`:
 
 ### Setting up the Facebook Poster service
 
-You will need to [create](https://developers.facebook.com/apps/) a Facebook app in order to use this channel. Within in this app you will find the `APP Id and APP Secret Key`. Place them inside your `.env` file. In order to load them, add this to your `config/services.php` file:
+You will need to [create](https://developers.facebook.com/apps) a Facebook app in order to use this channel. Within in this app you will find the App ID and secret. Place them inside your `.env` file. In order to load them, add this to your `config/services.php` file:
 
 ```php
 ...
 'facebook_poster' => [
-	'app_id'    => getenv('FACEBOOK_APP_ID'),
+	'app_id' => getenv('FACEBOOK_APP_ID'),
 	'app_secret' => getenv('FACEBOOK_APP_SECRET'),
-	'access_token'    => getenv('FACEBOOK_ACCESS_TOKEN'),
-]
+	'access_token' => getenv('FACEBOOK_ACCESS_TOKEN'),
+],
 ...
 ```
 
