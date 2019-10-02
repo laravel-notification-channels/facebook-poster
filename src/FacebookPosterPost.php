@@ -9,29 +9,57 @@ use NotificationChannels\FacebookPoster\Attachments\Video;
 
 class FacebookPosterPost
 {
-    /** @var string */
+    /**
+     * The post content.
+     *
+     * @var string
+     */
     protected $content;
 
-    /** @object FacebookPosterLink */
+    /**
+     * The post link.
+     *
+     * @var \NotificationChannels\FacebookPoster\Link
+     */
     protected $link;
 
-    /** @object FacebookPosterImage */
+    /**
+     * The post image.
+     *
+     * @var \NotificationChannels\FacebookPoster\Image
+     */
     protected $image;
 
-    /** @object FacebookPosterVideo */
+    /**
+     * The post video.
+     *
+     * @var \NotificationChannels\FacebookPoster\Video
+     */
     protected $video;
 
-    /** @var array */
+    /**
+     * Additional post parameters.
+     *
+     * @var array
+     */
     protected $params;
 
     /**
+     * The post API endpoint.
+     *
      * @var string
      */
     private $apiEndpoint = 'me/feed';
 
-    public function __construct($postContent)
+    /**
+     * Create a new post instance.
+     *
+     * @param  string  $content
+     * @return void
+     */
+    public function __construct($content)
     {
-        $this->content = $postContent;
+        $this->content = $content;
     }
 
     /**
