@@ -11,11 +11,11 @@ use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent;
 class FacebookPosterPost
 {
     /**
-     * The post content.
+     * The post message.
      *
      * @var string
      */
-    protected $content;
+    protected $message;
 
     /**
      * The post link.
@@ -55,22 +55,22 @@ class FacebookPosterPost
     /**
      * Create a new post instance.
      *
-     * @param  string  $content
+     * @param  string  $message
      * @return void
      */
-    public function __construct($content)
+    public function __construct($message)
     {
-        $this->content = $content;
+        $this->message = $message;
     }
 
     /**
-     * Get Post content.
+     * Get post message.
      *
      * @return string
      */
-    public function getContent()
+    public function getMessage()
     {
-        return $this->content;
+        return $this->message;
     }
 
     /**
@@ -155,7 +155,7 @@ class FacebookPosterPost
         $this->validate();
 
         $body = [
-            'message' => $this->getContent(),
+            'message' => $this->getMessage(),
         ];
 
         if ($this->link != null) {
@@ -184,7 +184,7 @@ class FacebookPosterPost
      */
     protected function validate()
     {
-        if ($this->content || $this->link || $this->media) {
+        if ($this->message || $this->link || $this->media) {
             return;
         }
 

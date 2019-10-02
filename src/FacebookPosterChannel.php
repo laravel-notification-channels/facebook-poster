@@ -24,8 +24,6 @@ class FacebookPosterChannel
      *
      * @param mixed                                  $notifiable
      * @param \Illuminate\Notifications\Notification $notification
-     *
-     * @throws InvalidPostContentException
      */
     public function send($notifiable, Notification $notification)
     {

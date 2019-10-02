@@ -11,14 +11,14 @@ class FacebookPosterPostTest extends TestCase
     /** @test */
     public function it_can_be_scheduled()
     {
-        $post = new FacebookPosterPost('Test');
+        $post = new FacebookPosterPost('message');
 
         $post->scheduledFor(1234);
 
         $result = $post->getPostBody();
 
         $this->assertEquals([
-            'message' => 'Test',
+            'message' => 'message',
             'published' => false,
             'scheduled_publish_time' => 1234,
         ], $result);
@@ -27,14 +27,14 @@ class FacebookPosterPostTest extends TestCase
     /** @test */
     public function it_can_be_scheduled_with_datetime()
     {
-        $post = new FacebookPosterPost('Test');
+        $post = new FacebookPosterPost('message');
 
         $post->scheduledFor(new DateTime('2000-01-01'));
 
         $result = $post->getPostBody();
 
         $this->assertEquals([
-            'message' => 'Test',
+            'message' => 'message',
             'published' => false,
             'scheduled_publish_time' => 946684800,
         ], $result);
@@ -43,14 +43,14 @@ class FacebookPosterPostTest extends TestCase
     /** @test */
     public function it_can_be_scheduled_with_immutable_datetime()
     {
-        $post = new FacebookPosterPost('Test');
+        $post = new FacebookPosterPost('message');
 
         $post->scheduledFor(new DateTimeImmutable('2000-01-01'));
 
         $result = $post->getPostBody();
 
         $this->assertEquals([
-            'message' => 'Test',
+            'message' => 'message',
             'published' => false,
             'scheduled_publish_time' => 946684800,
         ], $result);
