@@ -39,18 +39,11 @@ class FacebookPosterPost
     protected $video;
 
     /**
-     * Additional post parameters.
-     *
-     * @var array
-     */
-    protected $params;
-
-    /**
      * The post API endpoint.
      *
      * @var string
      */
-    private $apiEndpoint = 'me/feed';
+    protected $apiEndpoint = 'me/feed';
 
     /**
      * Create a new post instance.
@@ -129,6 +122,8 @@ class FacebookPosterPost
             ? $timestamp->getTimestamp()
             : $timestamp;
 
+        $this->published = false;
+        $t
         $this->params['published'] = false;
         $this->params['scheduled_publish_time'] = $timestamp;
 
@@ -145,12 +140,17 @@ class FacebookPosterPost
         return $this->apiEndpoint;
     }
 
+    public function getMedia()
+    {
+        return $this->image ?: $this->video;
+    }
+
     /**
      * Build Facebook post request body.
      *
      * @return array
      */
-    public function getPostBody()
+    public function getContent()
     {
         $this->validate();
 
@@ -160,14 +160,6 @@ class FacebookPosterPost
 
         if ($this->link != null) {
             $body['link'] = $this->link;
-        }
-
-        if ($this->image != null) {
-            $body['media'] = $this->image;
-        }
-
-        if ($this->video != null) {
-            $body['media'] = $this->video;
         }
 
         if ($this->params != null) {
