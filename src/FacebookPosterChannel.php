@@ -4,7 +4,6 @@ namespace NotificationChannels\FacebookPoster;
 
 use Facebook\Facebook;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent;
 
 class FacebookPosterChannel
 {
