@@ -40,7 +40,7 @@ class ImageTest extends TestCase
     {
         $image = new Image('path', 'endpoint');
 
-        $result = $image->getMethod();
+        $result = $image->getApiMethod();
 
         $this->assertEquals('fileToUpload', $result);
     }

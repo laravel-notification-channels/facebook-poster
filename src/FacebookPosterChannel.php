@@ -4,7 +4,6 @@ namespace NotificationChannels\FacebookPoster;
 
 use Facebook\Facebook;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\FacebookPoster\Attachments\Video;
 use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent;
 
 class FacebookPosterChannel
@@ -42,15 +41,12 @@ class FacebookPosterChannel
 
         $this->guardAgainstInvalidPostContent($postBody);
 
-        // here we check if post body has image or video to upload it first to facebook
         if (isset($postBody['media'])) {
             $endpoint = $postBody['media']->getApiEndpoint();
 
-            if ($postBody['media'] instanceof Video) {
-                $postBody = array_merge($postBody, $postBody['media']->getData());
-            }
+            $postBody = array_merge($postBody, $postBody['media']->getData());
 
-            $method = $postBody['media']->getMethod();
+            $method = $postBody['media']->getApiMethod();
 
             $postBody['source'] = $this->facebook->{$method}($postBody['media']->getPath());
 

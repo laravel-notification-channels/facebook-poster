@@ -2,83 +2,56 @@
 
 namespace NotificationChannels\FacebookPoster\Attachments;
 
-class Video
+class Video extends Attachment
 {
-    /** @var array */
-    protected $data = [];
-
-    /** @var string */
-    protected $path;
-
-    /** @var string */
-    protected $method = 'videoToUpload';
-
-    /** @var string */
-    protected $apiEndpoint;
-
     /**
-     * @param string $videoPath
-     * @param string $endpoint
-     */
-    public function __construct($videoPath, $endpoint)
-    {
-        $this->path = $videoPath;
-        $this->apiEndpoint = $endpoint;
-    }
-
-    /**
-     * @param $title
+     * The video title.
      *
-     * @return $this
+     * @var string
      */
-    public function setTitle($title)
-    {
-        $this->data['title'] = $title;
-
-        return $this;
-    }
+    protected $title;
 
     /**
-     * @param string $description
+     * The video description.
      *
-     * @return $this
+     * @var string
      */
-    public function setDescription($description)
-    {
-        $this->data['description'] = $description;
+    protected $description;
 
-        return $this;
+    /**
+     * The video API method.
+     *
+     * @var string
+     */
+    protected $apiMethod = 'videoToUpload';
+
+    /**
+     * Create a new video instance.
+     *
+     * @param  string  $path
+     * @param  string  $title
+     * @param  string  $description
+     * @param  string  $apiEndpoint
+     * @return void
+     */
+    public function __construct($path, $title = null, $description = null, $apiEndpoint)
+    {
+        $this->path = $path;
+        $this->title = $title;
+        $this->description = $description;
+        $this->apiEndpoint = $apiEndpoint;
     }
 
     /**
+     * Get additional attachment data.
+     *
      * @return array
      */
     public function getData()
     {
-        return $this->data;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @return string
-     */
-    public function getApiEndpoint()
-    {
-        return $this->apiEndpoint;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->method;
+        return array_filter([
+            'title' => $this->title,
+            'description' => $this->description,
+        ]);
     }
 }

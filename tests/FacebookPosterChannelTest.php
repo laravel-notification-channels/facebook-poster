@@ -27,7 +27,7 @@ class FacebookPosterChannelTest extends TestCase
     {
         $this->facebook->shouldReceive('post')->once()->with(
             'me/feed',
-            ['message' => 'Laravel Notification Channels are awesome!']
+            ['message' => 'message']
         );
 
         $this->channel->send(new TestNotifiable(), new TestNotification());
@@ -38,7 +38,7 @@ class FacebookPosterChannelTest extends TestCase
     {
         $this->facebook->shouldReceive('post')->once()->with(
             'me/feed',
-            ['message' => 'Laravel Notification Channels are awesome!', 'link' => 'http://laravel.com']
+            ['message' => 'message', 'link' => 'http://laravel.com']
         );
 
         $this->channel->send(new TestNotifiable(), new TestNotificationWithLink());
@@ -47,7 +47,10 @@ class FacebookPosterChannelTest extends TestCase
     /** @test */
     public function it_can_send_a_post_with_image()
     {
-        $this->facebook->shouldReceive('post')->once()->with('me/photos', ['message' => 'Laravel Notification Channels are awesome!', 'source' => null]);
+        $this->facebook->shouldReceive('post')->once()->with('me/photos', [
+            'source' => null,
+            'message' => 'message',
+        ]);
 
         $this->facebook->shouldReceive('fileToUpload')->once()->with('image1.png');
 
@@ -57,7 +60,12 @@ class FacebookPosterChannelTest extends TestCase
     /** @test */
     public function it_can_send_a_post_with_video()
     {
-        $this->facebook->shouldReceive('post')->once()->with('me/videos', ['message' => 'Laravel Notification Channels are awesome!', 'source' => null, 'title' => 'laravel', 'description' => 'laravel framework.']);
+        $this->facebook->shouldReceive('post')->once()->with('me/videos', [
+            'source' => null,
+            'title' => 'title',
+            'description' => 'description',
+            'message' => 'message',
+        ]);
 
         $this->facebook->shouldReceive('videoToUpload')->once()->with('video1.mp4');
 
