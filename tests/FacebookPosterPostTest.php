@@ -4,7 +4,6 @@ namespace NotificationChannels\FacebookPoster\Test;
 
 use DateTime;
 use DateTimeImmutable;
-use Orchestra\Testbench\TestCase;
 use NotificationChannels\FacebookPoster\FacebookPosterPost;
 
 class FacebookPosterPostTest extends TestCase
