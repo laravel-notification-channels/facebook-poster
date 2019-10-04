@@ -16,8 +16,8 @@ class FacebookPosterServiceProvider extends ServiceProvider
             ->needs(Facebook::class)
             ->give(function ($app) {
                 return new Facebook([
-                    'app_id' => $app['config']['services.facebook_poster.app_id'],
-                    'app_secret' => $app['config']['services.facebook_poster.app_secret'],
+                    'app_id' => $app['config']['services.facebook_poster.client_id'],
+                    'app_secret' => $app['config']['services.facebook_poster.client_secret'],
                     'default_access_token' => $app['config']['services.facebook_poster.access_token'],
                 ]);
             });
