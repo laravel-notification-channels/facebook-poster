@@ -36,25 +36,15 @@ class FacebookPosterChannel
             $this->switchSettings($facebookSettings);
         }
 
-        $facebookMessage = $notification->toFacebookPoster($notifiable);
+        $post = $notification->toFacebookPoster($notifiable);
 
-        $postBody = $facebookMessage->getPostBody();
+        $body = $post->getBody();
 
-        $endpoint = $facebookMessage->getApiEndpoint();
-
-        if (isset($postBody['media'])) {
-            $endpoint = $postBody['media']->getApiEndpoint();
-
-            $postBody = array_merge($postBody, $postBody['media']->getData());
-
-            $method = $postBody['media']->getApiMethod();
-
-            $postBody['source'] = $this->facebook->{$method}($postBody['media']->getPath());
-
-            unset($postBody['media']);
+        if ($media = $post->getMedia()) {
+            $body['source'] = $this->facebook->{$media::API_METHOD}($media->getPath());
         }
 
-        $this->facebook->post($endpoint, $postBody);
+        $this->facebook->post($post->getEndpoint(), $body);
     }
 
     /**
