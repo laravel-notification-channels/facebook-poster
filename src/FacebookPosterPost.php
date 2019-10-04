@@ -116,17 +116,13 @@ class FacebookPosterPost
     /**
      * Schedule the post for a date in the future.
      *
-     * @param  \DateTimeInterface|int  $timestamp
+     * @param  \DateTimeInterface  $timestamp
      * @return $this
      */
-    public function scheduledFor($timestamp)
+    public function scheduledFor(DateTimeInterface $timestamp)
     {
-        $timestamp = $timestamp instanceof DateTimeInterface
-            ? $timestamp->getTimestamp()
-            : $timestamp;
-
         $this->params['published'] = false;
-        $this->params['scheduled_publish_time'] = $timestamp;
+        $this->params['scheduled_publish_time'] = $timestamp->getTimestamp();
 
         return $this;
     }

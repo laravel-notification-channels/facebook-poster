@@ -13,22 +13,6 @@ class FacebookPosterPostTest extends TestCase
     {
         $post = new FacebookPosterPost('message');
 
-        $post->scheduledFor(1234);
-
-        $result = $post->getBody();
-
-        $this->assertEquals([
-            'message' => 'message',
-            'published' => false,
-            'scheduled_publish_time' => 1234,
-        ], $result);
-    }
-
-    /** @test */
-    public function it_can_be_scheduled_with_datetime()
-    {
-        $post = new FacebookPosterPost('message');
-
         $post->scheduledFor(new DateTime('2000-01-01'));
 
         $result = $post->getBody();

@@ -125,7 +125,7 @@ public function toFacebookPoster($notifiable) {
 ```
 
 ### Publish Facebook scheduled post
-It is also possible to publish a scheduled post. You just have to pass a UNIX timestamp to the `scheduledFor` method.
+It is also possible to publish a scheduled post. You just need to pass an instance of `DateTimeInterface` in - so any `DateTime` or Carbon instance will work.
 
 ```php
 public function toFacebookPoster($notifiable) {
