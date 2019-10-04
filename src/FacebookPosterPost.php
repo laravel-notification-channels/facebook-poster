@@ -3,7 +3,6 @@
 namespace NotificationChannels\FacebookPoster;
 
 use DateTimeInterface;
-use NotificationChannels\FacebookPoster\Attachments\Link;
 use NotificationChannels\FacebookPoster\Attachments\Image;
 use NotificationChannels\FacebookPoster\Attachments\Video;
 use NotificationChannels\FacebookPoster\Exceptions\InvalidPostContent;
@@ -25,18 +24,11 @@ class FacebookPosterPost
     protected $link;
 
     /**
-     * The post image.
+     * The post media.
      *
-     * @var \NotificationChannels\FacebookPoster\Attachments\Image
+     * @var \NotificationChannels\FacebookPoster\Attachments\Attachment
      */
-    protected $image;
-
-    /**
-     * The post video.
-     *
-     * @var \NotificationChannels\FacebookPoster\Attachments\Video
-     */
-    protected $video;
+    protected $media;
 
     /**
      * Additional post parameters.
@@ -50,7 +42,7 @@ class FacebookPosterPost
      *
      * @var string
      */
-    protected $apiEndpoint = 'me/feed';
+    protected $endpoint = 'me/feed';
 
     /**
      * Create a new post instance.
@@ -96,7 +88,8 @@ class FacebookPosterPost
      */
     public function withImage($path, $endpoint = 'me/photos')
     {
-        $this->image = new Image($path, $endpoint);
+        $this->media = new Image($path);
+        $this->endpoint = $endpoint;
 
         return $this;
     }
@@ -112,7 +105,10 @@ class FacebookPosterPost
      */
     public function withVideo($path, $title = null, $description = null, $endpoint = 'me/videos')
     {
-        $this->video = new Video($path, $title, $description, $endpoint);
+        $this->media = new Video($path);
+        $this->params['title'] = $title;
+        $this->params['description'] = $description;
+        $this->endpoint = $endpoint;
 
         return $this;
     }
@@ -136,13 +132,23 @@ class FacebookPosterPost
     }
 
     /**
-     * Return Facebook Post api endpoint.
+     * Return Facebook API endpoint.
      *
      * @return string
      */
-    public function getApiEndpoint()
+    public function getEndpoint()
     {
-        return $this->apiEndpoint;
+        return $this->endpoint;
+    }
+
+    /**
+     * Get the media attached to the post.
+     *
+     * @return \NotificationChannels\FacebookPoster\Attachment
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 
     /**
@@ -150,7 +156,7 @@ class FacebookPosterPost
      *
      * @return array
      */
-    public function getPostBody()
+    public function getBody()
     {
         $this->validate();
 
@@ -160,14 +166,6 @@ class FacebookPosterPost
 
         if ($this->link != null) {
             $body['link'] = $this->link;
-        }
-
-        if ($this->image != null) {
-            $body['media'] = $this->image;
-        }
-
-        if ($this->video != null) {
-            $body['media'] = $this->video;
         }
 
         if ($this->params != null) {
@@ -184,7 +182,7 @@ class FacebookPosterPost
      */
     protected function validate()
     {
-        if ($this->message || $this->link || $this->image || $this->video) {
+        if ($this->message || $this->link || $this->media) {
             return;
         }
 

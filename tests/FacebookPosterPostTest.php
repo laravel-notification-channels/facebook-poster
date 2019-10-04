@@ -15,7 +15,7 @@ class FacebookPosterPostTest extends TestCase
 
         $post->scheduledFor(1234);
 
-        $result = $post->getPostBody();
+        $result = $post->getBody();
 
         $this->assertEquals([
             'message' => 'message',
@@ -31,7 +31,7 @@ class FacebookPosterPostTest extends TestCase
 
         $post->scheduledFor(new DateTime('2000-01-01'));
 
-        $result = $post->getPostBody();
+        $result = $post->getBody();
 
         $this->assertEquals([
             'message' => 'message',
@@ -47,7 +47,7 @@ class FacebookPosterPostTest extends TestCase
 
         $post->scheduledFor(new DateTimeImmutable('2000-01-01'));
 
-        $result = $post->getPostBody();
+        $result = $post->getBody();
 
         $this->assertEquals([
             'message' => 'message',

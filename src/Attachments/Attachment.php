@@ -12,18 +12,14 @@ abstract class Attachment
     protected $path;
 
     /**
-     * The attachment API endpoint.
+     * Create a new attachment instance.
      *
-     * @var string
+     * @param  string  $path
      */
-    protected $apiEndpoint;
-
-    /**
-     * The attachment API method.
-     *
-     * @var string
-     */
-    protected $apiMethod = null;
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
 
     /**
      * Get the attachment path.
@@ -33,35 +29,5 @@ abstract class Attachment
     public function getPath()
     {
         return $this->path;
-    }
-
-    /**
-     * Get the attachment API endpoint.
-     *
-     * @return string
-     */
-    public function getApiEndpoint()
-    {
-        return $this->apiEndpoint;
-    }
-
-    /**
-     * Get the attachment API method.
-     *
-     * @return string
-     */
-    public function getApiMethod()
-    {
-        return $this->apiMethod;
-    }
-
-    /**
-     * Get additional attachment data.
-     *
-     * @return array
-     */
-    public function getData()
-    {
-        return [];
     }
 }
