@@ -117,10 +117,7 @@ It is also possible to publish video with your post too. You just have to pass t
 ```php
 public function toFacebookPoster($notifiable) {
     return (new FacebookPosterPost('Laravel notifications are awesome!'))
-    	->withVideo('video.mp4', [ 
-            'title' => 'My video', 
-            'description' => 'Remember to like and subscribe.' 
-        ]);
+    	->withVideo('video.mp4', 'My video',  'Remember to like and subscribe.');
 }
 ```
 
