@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\FacebookPoster\Tests;
 
-use Mockery;
 use Facebook\Facebook;
+use Mockery;
 use NotificationChannels\FacebookPoster\FacebookPosterChannel;
 
 class FacebookPosterChannelTest extends TestCase
