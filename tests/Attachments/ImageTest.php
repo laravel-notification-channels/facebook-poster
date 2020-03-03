@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\FacebookPoster\Tests\Attachments;
 
-use NotificationChannels\FacebookPoster\Tests\TestCase;
 use NotificationChannels\FacebookPoster\Attachments\Image;
+use NotificationChannels\FacebookPoster\Tests\TestCase;
 
 class ImageTest extends TestCase
 {
