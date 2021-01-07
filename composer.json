@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "php": "^7.3",
-        "facebook/graph-sdk": "^5.7",
+        "php": "^7.3|^8.0",
+        "guzzlehttp/guzzle": "^7.2",
         "illuminate/notifications": "^8.0",
         "illuminate/support": "^8.0"
     },
@@ -34,12 +34,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "NotificationChannels\\FacebookPoster\\FacebookPosterServiceProvider"
-            ]
-        }
     }
 }

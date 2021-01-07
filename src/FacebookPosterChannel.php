@@ -2,26 +2,29 @@
 
 namespace NotificationChannels\FacebookPoster;
 
-use Facebook\Facebook;
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Notifications\Notification;
 
 class FacebookPosterChannel
 {
     /**
-     * The Facebook client.
-     *
-     * @var \Facebook\Facebook
+     * The Guzzle client.
      */
-    protected $facebook;
+    protected Client $guzzle;
+
+    /**
+     * The application config.
+     */
+    protected Repository $config;
 
     /**
      * Create a new channel instance.
-     *
-     * @param  \Facebook\Facebook  $facebook
      */
-    public function __construct(Facebook $facebook)
+    public function __construct(Client $guzzle, Repository $config)
     {
-        $this->facebook = $facebook;
+        $this->guzzle = $guzzle;
+        $this->config = $config;
     }
 
     /**
@@ -38,13 +41,13 @@ class FacebookPosterChannel
 
         $post = $notification->toFacebookPoster($notifiable);
 
-        $body = $post->getBody();
+        $pageId = $this->config->get('services.facebook_poster.page_id');
+        $accessToken = $this->config->get('services.facebook_poster.access_token');
 
-        if ($media = $post->getMedia()) {
-            $body['source'] = $this->facebook->{$media::API_METHOD}($media->getPath());
-        }
-
-        $this->facebook->post($post->getEndpoint(), $body);
+        $this->guzzle->post(
+            "https://graph.facebook.com/v9.0/{$pageId}/feed?access_token={$accessToken}",
+            $post->getBody(),
+        );
     }
 
     /**

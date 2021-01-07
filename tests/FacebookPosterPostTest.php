@@ -9,34 +9,32 @@ use NotificationChannels\FacebookPoster\FacebookPosterPost;
 class FacebookPosterPostTest extends TestCase
 {
     /** @test */
-    public function it_can_be_scheduled()
+    public function it_returns_body()
     {
-        $post = new FacebookPosterPost('message');
-
-        $post->scheduledFor(new DateTime('2000-01-01'));
+        $post = (new FacebookPosterPost('message'))
+            ->withLink('https://laravel.com')
+            ->withParams([
+                'foo' => 'bar',
+            ]);
 
         $result = $post->getBody();
 
         $this->assertEquals([
             'message' => 'message',
-            'published' => false,
-            'scheduled_publish_time' => 946684800,
+            'link' => 'https://laravel.com',
+            'foo' => 'bar',
         ], $result);
     }
 
     /** @test */
-    public function it_can_be_scheduled_with_immutable_datetime()
+    public function it_returns_filtered_body()
     {
         $post = new FacebookPosterPost('message');
-
-        $post->scheduledFor(new DateTimeImmutable('2000-01-01'));
 
         $result = $post->getBody();
 
         $this->assertEquals([
             'message' => 'message',
-            'published' => false,
-            'scheduled_publish_time' => 946684800,
         ], $result);
     }
 }
