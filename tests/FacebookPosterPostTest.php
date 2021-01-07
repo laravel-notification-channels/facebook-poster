@@ -2,8 +2,6 @@
 
 namespace NotificationChannels\FacebookPoster\Tests;
 
-use DateTime;
-use DateTimeImmutable;
 use NotificationChannels\FacebookPoster\FacebookPosterPost;
 
 class FacebookPosterPostTest extends TestCase

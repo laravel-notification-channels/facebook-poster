@@ -2,14 +2,18 @@
 
 namespace NotificationChannels\FacebookPoster\Tests;
 
-use Facebook\Facebook;
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Config\Repository;
 use Mockery;
 use NotificationChannels\FacebookPoster\FacebookPosterChannel;
 
 class FacebookPosterChannelTest extends TestCase
 {
     /** @var Mockery\Mock */
-    protected $facebook;
+    protected $guzzle;
+
+    /** @var Mockery\Mock */
+    protected $config;
 
     /** @var \NotificationChannels\FacebookPoster\FacebookPosterChannel */
     protected $channel;
@@ -18,14 +22,15 @@ class FacebookPosterChannelTest extends TestCase
     {
         parent::setUp();
 
-        $this->facebook = Mockery::mock(Facebook::class);
-        $this->channel = new FacebookPosterChannel($this->facebook);
+        $this->guzzle = Mockery::mock(Client::class);
+        $this->config = Mockery::mock(Repository::class);
+        $this->channel = new FacebookPosterChannel($this->guzzle, $this->config);
     }
 
     /** @test */
     public function it_can_send_a_post()
     {
-        $this->facebook->shouldReceive('post')->once()->with(
+        $this->guzzle->shouldReceive('post')->once()->with(
             'me/feed',
             ['message' => 'message']
         );
@@ -36,7 +41,7 @@ class FacebookPosterChannelTest extends TestCase
     /** @test */
     public function it_can_send_a_post_with_link()
     {
-        $this->facebook->shouldReceive('post')->once()->with(
+        $this->guzzle->shouldReceive('post')->once()->with(
             'me/feed',
             ['message' => 'message', 'link' => 'http://laravel.com']
         );
@@ -47,7 +52,7 @@ class FacebookPosterChannelTest extends TestCase
     /** @test */
     public function it_can_send_a_post_with_image()
     {
-        $this->facebook->shouldReceive('post')->once()->with('me/photos', [
+        $this->guzzle->shouldReceive('post')->once()->with('me/photos', [
             'source' => null,
             'message' => 'message',
         ]);
@@ -60,7 +65,7 @@ class FacebookPosterChannelTest extends TestCase
     /** @test */
     public function it_can_send_a_post_with_video()
     {
-        $this->facebook->shouldReceive('post')->once()->with('me/videos', [
+        $this->guzzle->shouldReceive('post')->once()->with('me/videos', [
             'source' => null,
             'title' => 'title',
             'description' => 'description',
