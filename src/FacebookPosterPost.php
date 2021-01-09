@@ -39,7 +39,7 @@ class FacebookPosterPost
     /**
      * Set the post message.
      */
-    public function withMessage(?string $message): static
+    public function withMessage(?string $message)
     {
         $this->message = $message;
 
@@ -57,7 +57,7 @@ class FacebookPosterPost
     /**
      * Set ths post link.
      */
-    public function withLink(?string $link): static
+    public function withLink(?string $link)
     {
         $this->link = $link;
 
@@ -75,7 +75,7 @@ class FacebookPosterPost
     /**
      * Set the post params.
      */
-    public function withParams(array $params): static
+    public function withParams(array $params)
     {
         $this->params = $params;
 
