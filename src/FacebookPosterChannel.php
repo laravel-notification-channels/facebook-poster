@@ -5,6 +5,7 @@ namespace NotificationChannels\FacebookPoster;
 use GuzzleHttp\Client;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Arr;
 
 class FacebookPosterChannel
 {
@@ -35,29 +36,20 @@ class FacebookPosterChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if ($facebookSettings = $notifiable->routeNotificationFor('facebookPoster')) {
-            $this->switchSettings($facebookSettings);
-        }
-
         $post = $notification->toFacebookPoster($notifiable);
 
-        $pageId = $this->config->get('services.facebook_poster.page_id');
-        $accessToken = $this->config->get('services.facebook_poster.access_token');
+        $routing = $notifiable->routeNotificationFor('facebookPoster');
 
-        $this->guzzle->post(
-            "https://graph.facebook.com/v9.0/{$pageId}/feed?access_token={$accessToken}",
-            $post->getBody(),
-        );
-    }
+        $pageId = Arr::get($routing, 'page_id', function () {
+            return $this->config->get('services.facebook_poster.page_id');
+        });
 
-    /**
-     * Use per user settings instead of default ones.
-     *
-     * @param  array  $config
-     * @return void
-     */
-    protected function switchSettings(array $config)
-    {
-        $this->facebook = new Facebook($config);
+        $accessToken = Arr::get($routing, 'access_token', function () {
+            return $this->config->get('services.facebook_poster.access_token');
+        });
+
+        $this->guzzle->post("https://graph.facebook.com/v9.0/{$pageId}/feed?access_token={$accessToken}", [
+            'form_params' => $post->getBody(),
+        ]);
     }
 }

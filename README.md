@@ -15,11 +15,8 @@ This package makes it easy to post to Facebook using Laravel notification channe
 - [Installation](#installation)
 - [Setting up the Facebook posts service](#setting-up-the-facebook-poster-service)
 - [Usage](#usage)
-	- [Publish Facebook post](#publish-facebook-post)
-	- [Publish Facebook post with link](#publish-facebook-post-with-link)
-	- [Publish Facebook post with image](#publish-facebook-post-with-image)
-	- [Publish Facebook post with video](#publish-facebook-post-with-video)
-	- [Publish Facebook scheduled post](#publish-facebook-scheduled-post)
+  - [Publish Facebook post](#publish-facebook-post)
+  - [Publish Facebook post with link](#publish-facebook-post-with-link)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -27,12 +24,11 @@ This package makes it easy to post to Facebook using Laravel notification channe
 - [Credits](#credits)
 - [License](#license)
 
-
 ## Installation
 
 You can install this package via Composer:
 
-``` bash
+```bash
 composer require laravel-notification-channels/facebook-poster
 ```
 
@@ -77,7 +73,7 @@ class NewsWasPublished extends Notification
         return [FacebookPosterChannel::class];
     }
 
-    /** 
+    /**
      * Get the Facebook post representation of the notification.
      *
      * @param  mixed  $notifiable.
@@ -90,6 +86,7 @@ class NewsWasPublished extends Notification
 ```
 
 ### Publish Facebook post with link
+
 It is possible to publish link with your post too. You just have to pass the URL to the `withLink` method.
 
 ```php
@@ -100,6 +97,7 @@ public function toFacebookPoster($notifiable) {
 ```
 
 ### Publish Facebook post with image
+
 It is possible to publish image with your post too. You just have to pass the image path to the `withImage` method.
 
 ```php
@@ -112,22 +110,24 @@ public function toFacebookPoster($notifiable) {
 Note that an absolute URL is required.
 
 ### Publish Facebook post with video
+
 It is also possible to publish video with your post too. You just have to pass the video path to the `withVideo` method.
 
 ```php
 public function toFacebookPoster($notifiable) {
     return (new FacebookPosterPost('Laravel notifications are awesome!'))
-    	->withVideo('video.mp4', 'My video',  'Remember to like and subscribe.');
+        ->withVideo('video.mp4', 'My video',  'Remember to like and subscribe.');
 }
 ```
 
 ### Publish Facebook scheduled post
+
 It is also possible to publish a scheduled post. You just need to pass an instance of `DateTimeInterface` in - so any `DateTime` or Carbon instance will work.
 
 ```php
 public function toFacebookPoster($notifiable) {
     return (new FacebookPosterPost('Laravel notifications are awesome!'))
-    	->scheduledFor(now()->addWeek());
+        ->scheduledFor(now()->addWeek());
 }
 ```
 
@@ -137,7 +137,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 

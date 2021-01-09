@@ -2,15 +2,9 @@
 
 namespace NotificationChannels\FacebookPoster\Tests;
 
+use Illuminate\Notifications\Notifiable;
+
 class TestNotifiable
 {
-    use \Illuminate\Notifications\Notifiable;
-
-    /**
-     * @return int
-     */
-    public function routeNotificationForFacebookPoster()
-    {
-        return false;
-    }
+    use Notifiable;
 }
