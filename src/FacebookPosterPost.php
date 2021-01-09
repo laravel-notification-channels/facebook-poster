@@ -97,7 +97,7 @@ class FacebookPosterPost
     {
         $body = array_merge([
             'message' => $this->message,
-            'link' => $this->link
+            'link' => $this->link,
         ], $this->params);
 
         return array_filter($body);
