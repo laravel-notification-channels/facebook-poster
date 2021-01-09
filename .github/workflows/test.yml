@@ -28,7 +28,7 @@ jobs:
           php-version: ${{ matrix.php }}
 
       - name: Install composer dependencies
-        run: composer install --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
 
       - name: Run PHPUnit
         run: vendor/bin/phpunit --verbose
