@@ -2,26 +2,30 @@
 
 namespace NotificationChannels\FacebookPoster;
 
-use Facebook\Facebook;
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Arr;
 
 class FacebookPosterChannel
 {
     /**
-     * The Facebook client.
-     *
-     * @var \Facebook\Facebook
+     * The Guzzle client.
      */
-    protected $facebook;
+    protected Client $guzzle;
+
+    /**
+     * The application config.
+     */
+    protected Repository $config;
 
     /**
      * Create a new channel instance.
-     *
-     * @param  \Facebook\Facebook  $facebook
      */
-    public function __construct(Facebook $facebook)
+    public function __construct(Client $guzzle, Repository $config)
     {
-        $this->facebook = $facebook;
+        $this->guzzle = $guzzle;
+        $this->config = $config;
     }
 
     /**
@@ -32,29 +36,20 @@ class FacebookPosterChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if ($facebookSettings = $notifiable->routeNotificationFor('facebookPoster')) {
-            $this->switchSettings($facebookSettings);
-        }
-
         $post = $notification->toFacebookPoster($notifiable);
 
-        $body = $post->getBody();
+        $routing = $notifiable->routeNotificationFor('facebookPoster');
 
-        if ($media = $post->getMedia()) {
-            $body['source'] = $this->facebook->{$media::API_METHOD}($media->getPath());
-        }
+        $pageId = Arr::get($routing, 'page_id', function () {
+            return $this->config->get('services.facebook_poster.page_id');
+        });
 
-        $this->facebook->post($post->getEndpoint(), $body);
-    }
+        $accessToken = Arr::get($routing, 'access_token', function () {
+            return $this->config->get('services.facebook_poster.access_token');
+        });
 
-    /**
-     * Use per user settings instead of default ones.
-     *
-     * @param  array  $config
-     * @return void
-     */
-    protected function switchSettings(array $config)
-    {
-        $this->facebook = new Facebook($config);
+        $this->guzzle->post("https://graph.facebook.com/v9.0/{$pageId}/feed?access_token={$accessToken}", [
+            'form_params' => $post->getBody(),
+        ]);
     }
 }

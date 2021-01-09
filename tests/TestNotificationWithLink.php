@@ -10,6 +10,6 @@ class TestNotificationWithLink extends Notification
     public function toFacebookPoster($notifiable)
     {
         return (new FacebookPosterPost('message'))
-            ->withLink('http://laravel.com');
+            ->withLink('https://laravel.com');
     }
 }

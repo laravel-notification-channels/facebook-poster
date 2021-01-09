@@ -2,14 +2,18 @@
 
 namespace NotificationChannels\FacebookPoster\Tests;
 
-use Facebook\Facebook;
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Config\Repository;
 use Mockery;
 use NotificationChannels\FacebookPoster\FacebookPosterChannel;
 
 class FacebookPosterChannelTest extends TestCase
 {
     /** @var Mockery\Mock */
-    protected $facebook;
+    protected $guzzle;
+
+    /** @var Mockery\Mock */
+    protected $config;
 
     /** @var \NotificationChannels\FacebookPoster\FacebookPosterChannel */
     protected $channel;
@@ -18,57 +22,49 @@ class FacebookPosterChannelTest extends TestCase
     {
         parent::setUp();
 
-        $this->facebook = Mockery::mock(Facebook::class);
-        $this->channel = new FacebookPosterChannel($this->facebook);
+        $this->guzzle = Mockery::mock(Client::class);
+        $this->config = Mockery::mock(Repository::class);
+        $this->channel = new FacebookPosterChannel($this->guzzle, $this->config);
     }
 
     /** @test */
     public function it_can_send_a_post()
     {
-        $this->facebook->shouldReceive('post')->once()->with(
-            'me/feed',
-            ['message' => 'message']
+        $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
+        $this->config->shouldReceive('get')->with('services.facebook_poster.access_token')->andReturn('accessToken');
+
+        $this->guzzle->shouldReceive('post')->with(
+            'https://graph.facebook.com/v9.0/pageId/feed?access_token=accessToken',
+            ['form_params' => ['message' => 'message']],
         );
 
-        $this->channel->send(new TestNotifiable(), new TestNotification());
+        $this->channel->send(new TestNotifiable, new TestNotification);
     }
 
     /** @test */
     public function it_can_send_a_post_with_link()
     {
-        $this->facebook->shouldReceive('post')->once()->with(
-            'me/feed',
-            ['message' => 'message', 'link' => 'http://laravel.com']
+        $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
+        $this->config->shouldReceive('get')->with('services.facebook_poster.access_token')->andReturn('accessToken');
+
+        $this->guzzle->shouldReceive('post')->with(
+            'https://graph.facebook.com/v9.0/pageId/feed?access_token=accessToken',
+            ['form_params' => ['message' => 'message', 'link' => 'https://laravel.com']],
         );
 
-        $this->channel->send(new TestNotifiable(), new TestNotificationWithLink());
+        $this->channel->send(new TestNotifiable, new TestNotificationWithLink);
     }
 
     /** @test */
-    public function it_can_send_a_post_with_image()
+    public function it_can_send_post_with_custom_routing()
     {
-        $this->facebook->shouldReceive('post')->once()->with('me/photos', [
-            'source' => null,
-            'message' => 'message',
-        ]);
+        $this->config->shouldNotReceive('get');
 
-        $this->facebook->shouldReceive('fileToUpload')->once()->with('image1.png');
+        $this->guzzle->shouldReceive('post')->with(
+            'https://graph.facebook.com/v9.0/customPageId/feed?access_token=customAccessToken',
+            ['form_params' => ['message' => 'message']],
+        );
 
-        $this->channel->send(new TestNotifiable(), new TestNotificationWithImage());
-    }
-
-    /** @test */
-    public function it_can_send_a_post_with_video()
-    {
-        $this->facebook->shouldReceive('post')->once()->with('me/videos', [
-            'source' => null,
-            'title' => 'title',
-            'description' => 'description',
-            'message' => 'message',
-        ]);
-
-        $this->facebook->shouldReceive('videoToUpload')->once()->with('video1.mp4');
-
-        $this->channel->send(new TestNotifiable(), new TestNotificationWithVideo());
+        $this->channel->send(new TestNotifiableWithCustomRouting, new TestNotification);
     }
 }
