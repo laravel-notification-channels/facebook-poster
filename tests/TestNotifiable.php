@@ -7,4 +7,9 @@ use Illuminate\Notifications\Notifiable;
 class TestNotifiable
 {
     use Notifiable;
+
+    public function routeNotificationForFacebookPoster()
+    {
+        //
+    }
 }
