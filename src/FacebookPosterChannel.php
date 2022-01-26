@@ -32,7 +32,7 @@ class FacebookPosterChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification $notification
+     * @param  \Illuminate\Notifications\Notification  $notification
      */
     public function send($notifiable, Notification $notification)
     {
