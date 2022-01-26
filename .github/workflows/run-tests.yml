@@ -14,20 +14,20 @@ jobs:
         laravel: [8.*, 9.*]
         stability: [prefer-lowest, prefer-stable]
 
-        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+      name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
-        steps:
-          - uses: actions/checkout@v1
+      steps:
+        - uses: actions/checkout@v1
 
-          - name: Setup PHP
-            uses: shivammathur/setup-php@v2
-            with:
-              php-version: ${{ matrix.php }}
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: ${{ matrix.php }}
 
-          - name: Install composer dependencies
-            run: |
-              composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
-              composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
+        - name: Install composer dependencies
+          run: |
+            composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+            composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
 
-          - name: Run PHPUnit
-            run: vendor/bin/phpunit --verbose
+        - name: Run PHPUnit
+          run: vendor/bin/phpunit --verbose
