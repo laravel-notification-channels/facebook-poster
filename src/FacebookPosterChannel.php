@@ -48,7 +48,7 @@ class FacebookPosterChannel
             return $this->config->get('services.facebook_poster.access_token');
         });
 
-        $this->guzzle->post("https://graph.facebook.com/v9.0/{$pageId}/feed?access_token={$accessToken}", [
+        $this->guzzle->post("https://graph.facebook.com/v18.0/{$pageId}/feed?access_token={$accessToken}", [
             'form_params' => $post->getBody(),
         ]);
     }
