@@ -5,35 +5,14 @@ namespace NotificationChannels\FacebookPoster;
 class FacebookPosterPost
 {
     /**
-     * The post message.
-     *
-     * @var string
-     */
-    protected $message;
-
-    /**
-     * The post link.
-     *
-     * @var string
-     */
-    protected $link;
-
-    /**
-     * Additional post parameters.
-     *
-     * @var array
-     */
-    protected array $params = [];
-
-    /**
      * Create a new post instance.
-     *
-     * @param  string  $message
-     * @return void
      */
-    public function __construct($message)
-    {
-        $this->message = $message;
+    public function __construct(
+        public ?string $message = null,
+        public ?string $link = null,
+        public array $params = []
+    ) {
+        //
     }
 
     /**
@@ -47,14 +26,6 @@ class FacebookPosterPost
     }
 
     /**
-     * Get the post message.
-     */
-    public function getMessage(): ?string
-    {
-        return $this->message;
-    }
-
-    /**
      * Set ths post link.
      */
     public function withLink(?string $link)
@@ -65,14 +36,6 @@ class FacebookPosterPost
     }
 
     /**
-     * Get the post link.
-     */
-    public function getLink(): ?string
-    {
-        return $this->link;
-    }
-
-    /**
      * Set the post params.
      */
     public function withParams(array $params)
@@ -80,14 +43,6 @@ class FacebookPosterPost
         $this->params = $params;
 
         return $this;
-    }
-
-    /**
-     * Get the post params.
-     */
-    public function getParams(): array
-    {
-        return $this->params;
     }
 
     /**
