@@ -5,18 +5,16 @@ namespace NotificationChannels\FacebookPoster\Tests;
 use GuzzleHttp\Client;
 use Illuminate\Contracts\Config\Repository;
 use Mockery;
+use Mockery\MockInterface;
 use NotificationChannels\FacebookPoster\FacebookPosterChannel;
 
 class FacebookPosterChannelTest extends TestCase
 {
-    /** @var Mockery\Mock */
-    protected $guzzle;
+    protected MockInterface $guzzle;
 
-    /** @var Mockery\Mock */
-    protected $config;
+    protected MockInterface $config;
 
-    /** @var \NotificationChannels\FacebookPoster\FacebookPosterChannel */
-    protected $channel;
+    protected FacebookPosterChannel $channel;
 
     public function setUp(): void
     {
@@ -33,8 +31,8 @@ class FacebookPosterChannelTest extends TestCase
         $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
         $this->config->shouldReceive('get')->with('services.facebook_poster.access_token')->andReturn('accessToken');
 
-        $this->guzzle->shouldReceive('post')->with(
-            'https://graph.facebook.com/v9.0/pageId/feed?access_token=accessToken',
+        $this->guzzle->shouldReceive('post')->once()->with(
+            'https://graph.facebook.com/v18.0/pageId/feed?access_token=accessToken',
             ['form_params' => ['message' => 'message']],
         );
 
@@ -47,8 +45,8 @@ class FacebookPosterChannelTest extends TestCase
         $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
         $this->config->shouldReceive('get')->with('services.facebook_poster.access_token')->andReturn('accessToken');
 
-        $this->guzzle->shouldReceive('post')->with(
-            'https://graph.facebook.com/v9.0/pageId/feed?access_token=accessToken',
+        $this->guzzle->shouldReceive('post')->once()->with(
+            'https://graph.facebook.com/v18.0/pageId/feed?access_token=accessToken',
             ['form_params' => ['message' => 'message', 'link' => 'https://laravel.com']],
         );
 
@@ -60,8 +58,8 @@ class FacebookPosterChannelTest extends TestCase
     {
         $this->config->shouldNotReceive('get');
 
-        $this->guzzle->shouldReceive('post')->with(
-            'https://graph.facebook.com/v9.0/customPageId/feed?access_token=customAccessToken',
+        $this->guzzle->shouldReceive('post')->once()->with(
+            'https://graph.facebook.com/v18.0/customPageId/feed?access_token=customAccessToken',
             ['form_params' => ['message' => 'message']],
         );
 
