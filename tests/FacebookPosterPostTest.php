@@ -56,6 +56,34 @@ class FacebookPosterPostTest extends TestCase
     }
 
     /** @test */
+    public function it_can_publish_an_image()
+    {
+        $post = (new FacebookPosterPost('message'))
+            ->withImage('https://example.com/image.jpg')
+            ->withLink('https://laravel.com');
+
+        $this->assertSame('photos', $post->getGraphEdge());
+
+        $this->assertEquals([
+            'caption' => "message\nhttps://laravel.com",
+            'url' => 'https://example.com/image.jpg',
+        ], $post->getBody());
+    }
+
+    /** @test */
+    public function it_does_not_repeat_a_link_already_present_in_the_caption()
+    {
+        $post = (new FacebookPosterPost("message\nhttps://laravel.com"))
+            ->withImage('https://example.com/image.jpg')
+            ->withLink('https://laravel.com');
+
+        $this->assertEquals([
+            'caption' => "message\nhttps://laravel.com",
+            'url' => 'https://example.com/image.jpg',
+        ], $post->getBody());
+    }
+
+    /** @test */
     public function it_returns_filtered_body()
     {
         $post = new FacebookPosterPost('message');

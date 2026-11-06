@@ -54,6 +54,23 @@ class FacebookPosterChannelTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_a_post_with_image()
+    {
+        $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
+        $this->config->shouldReceive('get')->with('services.facebook_poster.access_token')->andReturn('accessToken');
+
+        $this->guzzle->shouldReceive('post')->once()->with(
+            'https://graph.facebook.com/v18.0/pageId/photos?access_token=accessToken',
+            ['form_params' => [
+                'caption' => "message\nhttps://laravel.com",
+                'url' => 'https://example.com/image.jpg',
+            ]],
+        );
+
+        $this->channel->send(new TestNotifiable, new TestNotificationWithImage);
+    }
+
+    /** @test */
     public function it_can_send_post_with_custom_routing()
     {
         $this->config->shouldNotReceive('get');
