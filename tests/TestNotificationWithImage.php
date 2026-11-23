@@ -3,14 +3,12 @@
 namespace NotificationChannels\FacebookPoster\Tests;
 
 use Illuminate\Notifications\Notification;
-use NotificationChannels\FacebookPoster\FacebookPosterPost;
+use NotificationChannels\FacebookPoster\FacebookPosterImage;
 
 class TestNotificationWithImage extends Notification
 {
     public function toFacebookPoster($notifiable)
     {
-        return (new FacebookPosterPost('message'))
-            ->withImage('https://example.com/image.jpg')
-            ->withLink('https://laravel.com');
+        return new FacebookPosterImage('https://example.com/image.jpg', 'caption');
     }
 }

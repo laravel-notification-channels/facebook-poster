@@ -92,13 +92,14 @@ public function toFacebookPoster($notifiable) {
 
 ### Publish Facebook post with image
 
-Pass a publicly reachable image URL to `withImage`. The post is published as a photo. Facebook does not make that photo a clickable link preview, so `withLink` appends the URL to the caption when it is not already in the message.
+To publish a photo, return a `FacebookPosterImage` with a publicly reachable image URL. It is sent to the Page `photos` edge, so it takes a caption instead of a message. Facebook does not turn a photo into a link preview, so include any link you want to share in the caption.
 
 ```php
+use NotificationChannels\FacebookPoster\FacebookPosterImage;
+
 public function toFacebookPoster($notifiable) {
-    return (new FacebookPosterPost('Laravel notifications are awesome!'))
-        ->withImage('https://laravel.com/img/logomark.min.svg')
-        ->withLink('https://laravel.com');
+    return (new FacebookPosterImage('https://laravel.com/img/logomark.min.svg'))
+        ->withCaption("Laravel notifications are awesome!\nhttps://laravel.com");
 }
 ```
 

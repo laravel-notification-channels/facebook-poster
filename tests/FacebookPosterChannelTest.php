@@ -62,8 +62,8 @@ class FacebookPosterChannelTest extends TestCase
         $this->guzzle->shouldReceive('post')->once()->with(
             'https://graph.facebook.com/v18.0/pageId/photos?access_token=accessToken',
             ['form_params' => [
-                'caption' => "message\nhttps://laravel.com",
                 'url' => 'https://example.com/image.jpg',
+                'caption' => 'caption',
             ]],
         );
 
