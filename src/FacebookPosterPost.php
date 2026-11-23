@@ -46,6 +46,14 @@ class FacebookPosterPost
     }
 
     /**
+     * Get the Graph API edge to publish to.
+     */
+    public function getEdge(): string
+    {
+        return 'feed';
+    }
+
+    /**
      * Get the filtered body.
      */
     public function getBody(): array

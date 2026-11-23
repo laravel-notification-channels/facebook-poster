@@ -66,4 +66,11 @@ class FacebookPosterPostTest extends TestCase
             'message' => 'message',
         ], $result);
     }
+
+    public function test_it_publishes_to_the_feed_edge()
+    {
+        $post = new FacebookPosterPost();
+
+        $this->assertEquals('feed', $post->getEdge());
+    }
 }

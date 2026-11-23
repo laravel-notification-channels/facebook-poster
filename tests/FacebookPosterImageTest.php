@@ -42,4 +42,11 @@ class FacebookPosterImageTest extends TestCase
             'foo' => 'bar',
         ], $image->getBody());
     }
+
+    public function test_it_publishes_to_the_photos_edge()
+    {
+        $image = new FacebookPosterImage('https://example.com/image.jpg');
+
+        $this->assertEquals('photos', $image->getEdge());
+    }
 }

@@ -39,6 +39,14 @@ class FacebookPosterImage
     }
 
     /**
+     * Get the Graph API edge to publish to.
+     */
+    public function getEdge(): string
+    {
+        return 'photos';
+    }
+
+    /**
      * Get the filtered body.
      */
     public function getBody(): array

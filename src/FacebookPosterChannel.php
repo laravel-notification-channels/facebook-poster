@@ -34,9 +34,7 @@ class FacebookPosterChannel
             return $this->config->get('services.facebook_poster.access_token');
         });
 
-        $edge = $post instanceof FacebookPosterImage ? 'photos' : 'feed';
-
-        $this->guzzle->post("https://graph.facebook.com/v18.0/{$pageId}/{$edge}?access_token={$accessToken}", [
+        $this->guzzle->post("https://graph.facebook.com/v18.0/{$pageId}/{$post->getEdge()}?access_token={$accessToken}", [
             'form_params' => $post->getBody(),
         ]);
     }
