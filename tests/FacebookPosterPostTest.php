@@ -3,10 +3,12 @@
 namespace NotificationChannels\FacebookPoster\Tests;
 
 use NotificationChannels\FacebookPoster\FacebookPosterPost;
+use PHPUnit\Framework\Attributes\Test;
 
 class FacebookPosterPostTest extends TestCase
 {
-    public function test_it_can_be_instantiated()
+    #[Test]
+    public function it_can_be_instantiated()
     {
         $post = new FacebookPosterPost('message');
 
@@ -19,7 +21,8 @@ class FacebookPosterPostTest extends TestCase
         ], $result);
     }
 
-    public function test_it_can_be_instantiated_with_arguments()
+    #[Test]
+    public function it_can_be_instantiated_with_arguments()
     {
         $post = new FacebookPosterPost(
             message: 'message',
@@ -36,8 +39,8 @@ class FacebookPosterPostTest extends TestCase
         ], $result);
     }
 
-    /** @test */
-    public function test_it_can_be_instantiated_with_setters()
+    #[Test]
+    public function it_can_be_instantiated_with_setters()
     {
         $post = (new FacebookPosterPost)
             ->withMessage('message')
@@ -55,7 +58,7 @@ class FacebookPosterPostTest extends TestCase
         ], $result);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_filtered_body()
     {
         $post = new FacebookPosterPost('message');
@@ -67,7 +70,8 @@ class FacebookPosterPostTest extends TestCase
         ], $result);
     }
 
-    public function test_it_publishes_to_the_feed_edge()
+    #[Test]
+    public function it_publishes_to_the_feed_edge()
     {
         $post = new FacebookPosterPost();
 
