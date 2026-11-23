@@ -7,6 +7,7 @@ use Illuminate\Contracts\Config\Repository;
 use Mockery;
 use Mockery\MockInterface;
 use NotificationChannels\FacebookPoster\FacebookPosterChannel;
+use PHPUnit\Framework\Attributes\Test;
 
 class FacebookPosterChannelTest extends TestCase
 {
@@ -25,7 +26,7 @@ class FacebookPosterChannelTest extends TestCase
         $this->channel = new FacebookPosterChannel($this->guzzle, $this->config);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_send_a_post()
     {
         $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
@@ -39,7 +40,7 @@ class FacebookPosterChannelTest extends TestCase
         $this->channel->send(new TestNotifiable, new TestNotification);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_send_a_post_with_link()
     {
         $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
@@ -53,7 +54,7 @@ class FacebookPosterChannelTest extends TestCase
         $this->channel->send(new TestNotifiable, new TestNotificationWithLink);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_send_a_post_with_image()
     {
         $this->config->shouldReceive('get')->with('services.facebook_poster.page_id')->andReturn('pageId');
@@ -70,7 +71,7 @@ class FacebookPosterChannelTest extends TestCase
         $this->channel->send(new TestNotifiable, new TestNotificationWithImage);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_send_post_with_custom_routing()
     {
         $this->config->shouldNotReceive('get');
