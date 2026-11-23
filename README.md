@@ -15,6 +15,7 @@ This package makes it easy to post to Facebook using Laravel notification channe
 - [Usage](#usage)
   - [Publish Facebook post](#publish-facebook-post)
   - [Publish Facebook post with link](#publish-facebook-post-with-link)
+  - [Publish Facebook post with image](#publish-facebook-post-with-image)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Security](#security)
@@ -86,6 +87,19 @@ It is possible to publish link with your post too. You just have to pass the URL
 public function toFacebookPoster($notifiable) {
     return (new FacebookPosterPost('Laravel notifications are awesome!'))
         ->withLink('https://laravel.com');
+}
+```
+
+### Publish Facebook post with image
+
+To publish a photo, return a `FacebookPosterImage` with a publicly reachable image URL. It is sent to the Page `photos` edge, so it takes a caption instead of a message. Facebook does not turn a photo into a link preview, so include any link you want to share in the caption.
+
+```php
+use NotificationChannels\FacebookPoster\FacebookPosterImage;
+
+public function toFacebookPoster($notifiable) {
+    return (new FacebookPosterImage('https://laravel.com/img/logomark.min.svg'))
+        ->withCaption("Laravel notifications are awesome!\nhttps://laravel.com");
 }
 ```
 
